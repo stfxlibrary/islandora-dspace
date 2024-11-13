@@ -234,9 +234,11 @@
 	</xsl:template>
 	
 	<xsl:template match="mods:tableOfContents">
-		<dc:description>
-			<xsl:value-of select="."/>
-		</dc:description>
+		<xsl:if test="text()">
+			<dc:description>
+				<xsl:value-of select="."/>
+			</dc:description>
+		</xsl:if>
 	</xsl:template>	
 	
 	<xsl:template match="mods:abstract">
@@ -279,20 +281,22 @@
 	</xsl:template>
 	
 	<xsl:template match="mods:dateIssued">
-		<dc:date.issued>
-			<xsl:choose>
-				<xsl:when test="@point='start'">
-					<xsl:value-of select="."/>
-					<xsl:text> - </xsl:text>
-				</xsl:when>
-				<xsl:when test="@point='end'">
-					<xsl:value-of select="."/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="."/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</dc:date.issued>
+		<xsl:if test="text()">
+			<dc:date.issued>
+				<xsl:choose>
+					<xsl:when test="@point='start'">
+						<xsl:value-of select="."/>
+						<xsl:text> - </xsl:text>
+					</xsl:when>
+					<xsl:when test="@point='end'">
+						<xsl:value-of select="."/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="."/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</dc:date.issued>
+		</xsl:if>
 	</xsl:template>
 	
 	
