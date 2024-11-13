@@ -419,6 +419,7 @@
 	</xsl:template>
 -->
 	<xsl:template match="mods:identifier">
+		<xsl:if test="text()">
 			<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 			<xsl:choose>
 				<!-- 2.0: added identifier type attribute to output, if it is present-->
@@ -460,6 +461,7 @@
 					</dc:identifier>
 				</xsl:otherwise>
 			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="mods:location">
