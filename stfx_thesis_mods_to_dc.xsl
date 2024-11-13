@@ -319,19 +319,21 @@
 	</xsl:template>
 
 	<xsl:template match="mods:genre">
-		<xsl:choose>
-			<xsl:when test="@authority='dct'">
-				<dc:type>
-					<xsl:value-of select="."/>
-				</dc:type>
-			</xsl:when>
-			<xsl:otherwise>
-				<dc:type>
-					<xsl:value-of select="."/>
-				</dc:type>
-				<xsl:apply-templates select="mods:typeOfResource"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:if test="text()">
+			<xsl:choose>
+				<xsl:when test="@authority='dct'">
+					<dc:type>
+						<xsl:value-of select="."/>
+					</dc:type>
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:type>
+						<xsl:value-of select="."/>
+					</dc:type>
+					<xsl:apply-templates select="mods:typeOfResource"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="mods:typeOfResource">
