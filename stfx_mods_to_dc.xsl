@@ -339,9 +339,39 @@
 			<dc:type>Text</dc:type>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<xsl:template match="mods:physicalDescription">
-		<xsl:for-each select="mods:extent | mods:form | mods:internetMediaType">
+		
+		<xsl:for-each select="mods:extent">
+			<xsl:if test="text()">
+				<dc:format.extent>
+					
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format.extent>
+			</xsl:if>
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:form">
+			<xsl:if test="text()">
+				<dc:format.medium>
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format.medium>
+			</xsl:if>
+		</xsl:for-each>	
+		
+		<xsl:for-each select="mods:internetMediaType">
 			<xsl:if test="text()">
 				<dc:format>
 					<!-- tmee mods 3.5 -->
@@ -353,8 +383,9 @@
 					<xsl:value-of select="."/>
 				</dc:format>
 			</xsl:if>
-		</xsl:for-each>
+		</xsl:for-each>	
 	</xsl:template>
+	
 	<!--
 	<xsl:template match="mods:mimeType">
 		<dc:format>
