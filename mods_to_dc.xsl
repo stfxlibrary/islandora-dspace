@@ -348,25 +348,9 @@
 	</xsl:template>
 
 	<xsl:template match="mods:language">
-		<xsl:for-each select="mods:languageTerm">
-			<xsl:choose>
-				<xsl:when test="@type='code'">
-					<dc:language>
-						<xsl:value-of select="."/>
-					</dc:language>
-					<dc:language.iso>
-						<xsl:value-of select="@authority"/>
-					</dc:language.iso>			
-				</xsl:when>
-				<xsl:otherwise>
-					<dc:language>
-						<xsl:value-of select="."/>
-					</dc:language>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:for-each>
-		
-		
+		<dc:language>
+			<xsl:value-of select="child::*"/>
+		</dc:language>
 	</xsl:template>
 
 	<xsl:template match="mods:relatedItem[mods:titleInfo | mods:name | mods:identifier | mods:location]">
