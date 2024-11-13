@@ -254,7 +254,7 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template match="mods:dateIssued | mods:dateCreated | mods:dateCaptured">
+	<xsl:template match="mods:dateCreated | mods:dateCaptured">
 		<dc:date>
 			<xsl:choose>
 				<xsl:when test="@point='start'">
@@ -270,14 +270,38 @@
 			</xsl:choose>
 		</dc:date>
 	</xsl:template>
-
-	<xsl:template match="mods:dateIssued[@point='start'] | mods:dateCreated[@point='start'] | mods:dateCaptured[@point='start'] | mods:dateOther[@point='start'] ">
+	
+	<xsl:template match="mods:dateCreated[@point='start'] | mods:dateCaptured[@point='start'] | mods:dateOther[@point='start'] ">
 		<xsl:variable name="dateName" select="local-name()"/>
 		<dc:date>
 			<xsl:value-of select="."/>-<xsl:value-of select="../*[local-name()=$dateName][@point='end']"/>
 		</dc:date>
 	</xsl:template>
-
+	
+	<xsl:template match="mods:dateIssued">
+		<dc:date.issued>
+			<xsl:choose>
+				<xsl:when test="@point='start'">
+					<xsl:value-of select="."/>
+					<xsl:text> - </xsl:text>
+				</xsl:when>
+				<xsl:when test="@point='end'">
+					<xsl:value-of select="."/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="."/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</dc:date.issued>
+	</xsl:template>
+	
+	
+	<xsl:template match="mods:dateIssued[@point='start']">
+		<xsl:variable name="dateName" select="local-name()"/>
+		<dc:date.issued>
+			<xsl:value-of select="."/>-<xsl:value-of select="../*[local-name()=$dateName][@point='end']"/>
+		</dc:date.issued>
+	</xsl:template>
 	<xsl:template match="mods:temporal[@point='start']  ">
 		<xsl:value-of select="."/>-<xsl:value-of select="../mods:temporal[@point='end']"/>
 	</xsl:template>
