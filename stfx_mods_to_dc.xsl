@@ -80,27 +80,29 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
+	
 	<xsl:template match="mods:titleInfo">
-		<dc:title>
-			<xsl:value-of select="mods:nonSort"/>
-			<xsl:if test="mods:nonSort">
-				<xsl:text> </xsl:text>
-			</xsl:if>
-			<xsl:value-of select="mods:title"/>
-			<xsl:if test="mods:subTitle">
-				<xsl:text>: </xsl:text>
-				<xsl:value-of select="mods:subTitle"/>
-			</xsl:if>
-			<xsl:if test="mods:partNumber">
-				<xsl:text>. </xsl:text>
-				<xsl:value-of select="mods:partNumber"/>
-			</xsl:if>
-			<xsl:if test="mods:partName">
-				<xsl:text>. </xsl:text>
-				<xsl:value-of select="mods:partName"/>
-			</xsl:if>
-		</dc:title>
+		<xsl:if test="mods:title/text()">
+			<dc:title>
+				<xsl:value-of select="mods:nonSort"/>
+				<xsl:if test="mods:nonSort">
+					<xsl:text> </xsl:text>
+				</xsl:if>
+				<xsl:value-of select="mods:title"/>
+				<xsl:if test="mods:subTitle/text()">
+					<xsl:text>: </xsl:text>
+					<xsl:value-of select="mods:subTitle"/>
+				</xsl:if>
+				<xsl:if test="mods:partNumber">
+					<xsl:text>. </xsl:text>
+					<xsl:value-of select="mods:partNumber"/>
+				</xsl:if>
+				<xsl:if test="mods:partName">
+					<xsl:text>. </xsl:text>
+					<xsl:value-of select="mods:partName"/>
+				</xsl:if>
+			</dc:title>
+		</xsl:if>
 	</xsl:template>
 
 	<!-- tmee mods 3.5 -->
