@@ -490,6 +490,13 @@
 				</dc:identifier>
 			</xsl:if>
 		</xsl:for-each>
+		<xsl:for-each select="mods:physicalLocation">
+			<xsl:if test="text()">
+				<dc:relation>
+					<xsl:value-of select="."/>
+				</dc:relation>
+			</xsl:if>
+		</xsl:for-each>		
 	</xsl:template>
 
 	<xsl:template match="mods:language">
