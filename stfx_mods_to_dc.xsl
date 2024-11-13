@@ -426,10 +426,29 @@
 
 
 	<xsl:template match="mods:accessCondition">
-		<dc:rights>
-			<xsl:value-of select="."/>
-		</dc:rights>
+		<xsl:variable name="contact_author" select="."></xsl:variable>
+		<xsl:choose>
+			<xsl:when test="(@displayLabel='License') and ($contact_author='Contact Author')">
+				<dc:rights.holder>Author</dc:rights.holder>
+			</xsl:when>
+			<xsl:when test="(@displayLabel='Permission Statement')">
+				<dc:rights>
+					<xsl:value-of select="."/>
+				</dc:rights>
+			</xsl:when>
+			<xsl:when test="(@type='restriction on access')">
+				<dc:rights>
+					<xsl:value-of select="."/>
+				</dc:rights>
+			</xsl:when>			
+			<xsl:otherwise>
+				<dc:rights>
+					<xsl:value-of select="."/>
+				</dc:rights>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
+	
 
 	<xsl:template name="name">
 		<xsl:variable name="name">
