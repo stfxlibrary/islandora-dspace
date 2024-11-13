@@ -223,20 +223,21 @@
 	</xsl:template>
 
 	<xsl:template match="mods:note">
-		
-		<xsl:variable name="note" select="."/>
-		<xsl:choose>
-			<xsl:when test="contains($note,'Print copy') = true()">
-				<dc:relation>
-					<xsl:value-of select="."/>
-				</dc:relation>				
-			</xsl:when>
-			<xsl:otherwise>
-				<dc:description>
-					<xsl:value-of select="."/>
-				</dc:description>
-			</xsl:otherwise>
-		</xsl:choose>		
+		<xsl:if test="text()">
+			<xsl:variable name="note" select="."/>
+			<xsl:choose>
+				<xsl:when test="contains($note,'Print copy') = true()">
+					<dc:relation>
+						<xsl:value-of select="."/>
+					</dc:relation>				
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:description>
+						<xsl:value-of select="."/>
+					</dc:description>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 	
 	<xsl:template match="mods:tableOfContents">
