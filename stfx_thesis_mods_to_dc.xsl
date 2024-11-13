@@ -220,11 +220,28 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="mods:tableOfContents | mods:note">
+	<xsl:template match="mods:note">
+		
+		<xsl:variable name="note" select="."/>
+		<xsl:choose>
+			<xsl:when test="contains($note,'Print copy') = true()">
+				<dc:relation>
+					<xsl:value-of select="."/>
+				</dc:relation>				
+			</xsl:when>
+			<xsl:otherwise>
+				<dc:description>
+					<xsl:value-of select="."/>
+				</dc:description>
+			</xsl:otherwise>
+		</xsl:choose>		
+	</xsl:template>
+	
+	<xsl:template match="mods:tableOfContents">
 		<dc:description>
 			<xsl:value-of select="."/>
 		</dc:description>
-	</xsl:template>
+	</xsl:template>	
 	
 	<xsl:template match="mods:abstract">
 		<dc:description.abstract>
