@@ -395,29 +395,35 @@
 -->
 	<xsl:template match="mods:identifier">
 		<xsl:if test="text()">
-			<dc:identifier.other>
-				<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-				<xsl:choose>
-					<!-- 2.0: added identifier type attribute to output, if it is present-->
-					<xsl:when test="contains(.,':')">
+			<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+			<xsl:choose>
+				<!-- 2.0: added identifier type attribute to output, if it is present-->
+				<xsl:when test="contains(.,':')">
+					<dc:identifier>
 						<xsl:value-of select="."/>
-					</xsl:when>
-					<!-- ws 1.7  -->
-					<xsl:when test="@type">
-						<xsl:choose>
-							<xsl:when test="@type">
+					</dc:identifier>	
+				</xsl:when>
+				<!-- ws 1.7  -->
+				<xsl:when test="@type">
+					<xsl:choose>		
+						<xsl:when test="@type">
+							<dc:identifier>
 								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-							</xsl:when>
-							<xsl:when test="contains ('isbn issn uri doi lccn uri', $type)">
+							</dc:identifier>
+						</xsl:when>
+						<xsl:when test="contains ('isbn issn uri doi lccn uri', $type)">
+							<dc:identifier>
 								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-							</xsl:when>
-						</xsl:choose>
-					</xsl:when>
-					<xsl:otherwise>
+							</dc:identifier>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:identifier.other>
 						<xsl:value-of select="."/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</dc:identifier.other>
+					</dc:identifier.other>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
 

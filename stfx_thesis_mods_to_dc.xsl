@@ -474,9 +474,9 @@
 					</xsl:choose>
 				</xsl:when>
 				<xsl:otherwise>
-					<dc:identifier>
+					<dc:identifier.other>
 						<xsl:value-of select="."/>
-					</dc:identifier>
+					</dc:identifier.other>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
