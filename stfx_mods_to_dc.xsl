@@ -146,7 +146,16 @@
 
 	<!-- ws 1.7  -->
 	<xsl:template match="mods:subject">
-		<xsl:if test="mods:topic | mods:occupation | mods:name">
+		<xsl:if test="mods:topic">
+			<xsl:for-each select="mods:topic">
+				<xsl:if test="text()">
+					<dc:subject>
+						<xsl:value-of select="."/>
+					</dc:subject>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:if>		
+		<xsl:if test="mods:occupation | mods:name">
 			<dc:subject>
 				<xsl:for-each select="mods:topic | mods:occupation">
 					<xsl:value-of select="."/>
@@ -166,9 +175,11 @@
 			</dc:subject>
 		</xsl:for-each>
 		<xsl:for-each select="mods:geographic">
-			<dc:coverage>
-				<xsl:value-of select="."/>
-			</dc:coverage>
+			<xsl:if test="text()">
+				<dc:coverage>
+					<xsl:value-of select="."/>
+				</dc:coverage>
+			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:hierarchicalGeographic">
 			<dc:coverage.spatial>
@@ -191,32 +202,33 @@
 				</xsl:for-each>
 			</dc:coverage.temporal>
 		</xsl:if>
-		<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
+		<!--<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
 			<dc:subject>
 				<xsl:for-each select="*[local-name()!='cartographics' and local-name()!='geographicCode' and local-name()!='hierarchicalGeographic'] ">
 					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">--</xsl:if>
+					<xsl:if test="position()!=last()">-\-</xsl:if>
 				</xsl:for-each>
 			</dc:subject>
-		</xsl:if>
+		</xsl:if>-->
 	</xsl:template>
 
 
 	<xsl:template match="mods:note">
-		
-		<xsl:variable name="note" select="."/>
-		<xsl:choose>
-			<xsl:when test="contains($note,'Print copy') = true()">
-				<dc:relation>
-					<xsl:value-of select="."/>
-				</dc:relation>				
-			</xsl:when>
-			<xsl:otherwise>
-				<dc:description>
-					<xsl:value-of select="."/>
-				</dc:description>
-			</xsl:otherwise>
-		</xsl:choose>		
+		<xsl:if test="text()">		
+			<xsl:variable name="note" select="."/>
+			<xsl:choose>
+				<xsl:when test="contains($note,'Print copy') = true()">
+					<dc:relation>
+						<xsl:value-of select="."/>
+					</dc:relation>				
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:description>
+						<xsl:value-of select="."/>
+					</dc:description>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 	
 	<xsl:template match="mods:tableOfContents">
@@ -272,19 +284,21 @@
 		<xsl:value-of select="."/>
 	</xsl:template>
 	<xsl:template match="mods:genre">
-		<xsl:choose>
-			<xsl:when test="@authority='dct'">
-				<dc:type>
-					<xsl:value-of select="."/>
-				</dc:type>
-			</xsl:when>
-			<xsl:otherwise>
-				<dc:type>
-					<xsl:value-of select="."/>
-				</dc:type>
-				<xsl:apply-templates select="mods:typeOfResource"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:if test="text()">
+			<xsl:choose>
+				<xsl:when test="@authority='dct'">
+					<dc:type>
+						<xsl:value-of select="."/>
+					</dc:type>
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:type>
+						<xsl:value-of select="."/>
+					</dc:type>
+					<xsl:apply-templates select="mods:typeOfResource"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="mods:typeOfResource">
@@ -328,15 +342,17 @@
 
 	<xsl:template match="mods:physicalDescription">
 		<xsl:for-each select="mods:extent | mods:form | mods:internetMediaType">
-			<dc:format>
-				<!-- tmee mods 3.5 -->
-				<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-				<!-- ws 1.7 -->
-				<xsl:if test="@unit">
-					<xsl:value-of select="$unit"/>: 
-				</xsl:if>
-				<xsl:value-of select="."/>
-			</dc:format>
+			<xsl:if test="text()">
+				<dc:format>
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format>
+			</xsl:if>
 		</xsl:for-each>
 	</xsl:template>
 	<!--
@@ -347,61 +363,69 @@
 	</xsl:template>
 -->
 	<xsl:template match="mods:identifier">
-		<dc:identifier.other>
-			<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-			<xsl:choose>
-				<!-- 2.0: added identifier type attribute to output, if it is present-->
-				<xsl:when test="contains(.,':')">
-					<xsl:value-of select="."/>
-				</xsl:when>
-				<!-- ws 1.7  -->
-				<xsl:when test="@type">
-					<xsl:choose>
-						<xsl:when test="@type">
-							<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-						</xsl:when>
-						<xsl:when test="contains ('isbn issn uri doi lccn uri', $type)">
-							<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-						</xsl:when>
-					</xsl:choose>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="."/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</dc:identifier.other>
+		<xsl:if test="text()">
+			<dc:identifier.other>
+				<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+				<xsl:choose>
+					<!-- 2.0: added identifier type attribute to output, if it is present-->
+					<xsl:when test="contains(.,':')">
+						<xsl:value-of select="."/>
+					</xsl:when>
+					<!-- ws 1.7  -->
+					<xsl:when test="@type">
+						<xsl:choose>
+							<xsl:when test="@type">
+								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
+							</xsl:when>
+							<xsl:when test="contains ('isbn issn uri doi lccn uri', $type)">
+								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
+							</xsl:when>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="."/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</dc:identifier.other>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
-			<dc:identifier>
-				<xsl:value-of select="."/>
-			</dc:identifier>
+			<xsl:if test="text()">
+				<dc:identifier>
+					<xsl:value-of select="."/>
+				</dc:identifier>
+			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:physicalLocation">
-			<dc:relation>
-				<xsl:value-of select="."/>
-			</dc:relation>
+			<xsl:if test="text()">
+				<dc:relation>
+					<xsl:value-of select="."/>
+				</dc:relation>
+			</xsl:if>
 		</xsl:for-each>		
 	</xsl:template>
 
 	<xsl:template match="mods:language">
 		<xsl:for-each select="mods:languageTerm">
-			<xsl:choose>
-				<xsl:when test="@type='code'">
-					<dc:language>
-						<xsl:value-of select="."/>
-					</dc:language>
-					<dc:language.iso>
-						<xsl:value-of select="@authority"/>
-					</dc:language.iso>			
-				</xsl:when>
-				<xsl:otherwise>
-					<dc:language>
-						<xsl:value-of select="."/>
-					</dc:language>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:if test="text()">
+				<xsl:choose>
+					<xsl:when test="@type='code'">
+						<dc:language>
+							<xsl:value-of select="."/>
+						</dc:language>
+						<dc:language.iso>
+							<xsl:value-of select="@authority"/>
+						</dc:language.iso>			
+					</xsl:when>
+					<xsl:otherwise>
+						<dc:language>
+							<xsl:value-of select="."/>
+						</dc:language>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:if>
 		</xsl:for-each>
 		
 		

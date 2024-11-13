@@ -162,21 +162,25 @@
 	<xsl:template match="mods:subject">
 		<xsl:if test="mods:topic">
 			<xsl:for-each select="mods:topic">
-				<dc:subject>
-					<xsl:value-of select="."/>
-				</dc:subject>
+				<xsl:if test="text()">
+					<dc:subject>
+						<xsl:value-of select="."/>
+					</dc:subject>
+				</xsl:if>
 			</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="mods:occupation | mods:name">
-			<dc:subject>
-				<xsl:for-each select="mods:occupation">
-					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">--</xsl:if>
-				</xsl:for-each>
-				<xsl:for-each select="mods:name">
-					<xsl:call-template name="name"/>
-				</xsl:for-each>
-			</dc:subject>
+			<xsl:if test="text()">
+				<dc:subject>
+					<xsl:for-each select="mods:occupation">
+						<xsl:value-of select="."/>
+						<xsl:if test="position()!=last()">--</xsl:if>
+					</xsl:for-each>
+					<xsl:for-each select="mods:name">
+						<xsl:call-template name="name"/>
+					</xsl:for-each>
+				</dc:subject>
+			</xsl:if>
 		</xsl:if>		
 		<xsl:for-each select="mods:titleInfo">
 			<dc:subject>
@@ -187,9 +191,11 @@
 			</dc:subject>
 		</xsl:for-each>
 		<xsl:for-each select="mods:geographic">
-			<dc:coverage>
-				<xsl:value-of select="."/>
-			</dc:coverage>
+			<xsl:if test="text()">
+				<dc:coverage>
+					<xsl:value-of select="."/>
+				</dc:coverage>
+			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:hierarchicalGeographic">
 			<dc:coverage>
@@ -205,21 +211,23 @@
 			</dc:coverage>
 		</xsl:for-each>
 		<xsl:if test="mods:temporal">
-			<dc:coverage>
-				<xsl:for-each select="mods:temporal">
-					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">-</xsl:if>
-				</xsl:for-each>
-			</dc:coverage>
+			<xsl:if test="text()">
+				<dc:coverage>
+					<xsl:for-each select="mods:temporal">
+						<xsl:value-of select="."/>
+						<xsl:if test="position()!=last()">-</xsl:if>
+					</xsl:for-each>
+				</dc:coverage>
+			</xsl:if>
 		</xsl:if>
-		<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
+<!--		<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
 			<dc:subject>
 				<xsl:for-each select="*[local-name()!='cartographics' and local-name()!='geographicCode' and local-name()!='hierarchicalGeographic'] ">
 					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">--</xsl:if>
+					<xsl:if test="position()!=last()">-\-</xsl:if>
 				</xsl:for-each>
 			</dc:subject>
-		</xsl:if>
+		</xsl:if>-->
 	</xsl:template>
 
 	<xsl:template match="mods:note">
@@ -379,39 +387,46 @@
 	<xsl:template match="mods:physicalDescription">
 
 		<xsl:for-each select="mods:extent">
-			<dc:format.extent>
-				<!-- tmee mods 3.5 -->
-				<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-				<!-- ws 1.7 -->
-				<xsl:if test="@unit">
-					<xsl:value-of select="$unit"/>: 
-				</xsl:if>
-				<xsl:value-of select="."/>
-			</dc:format.extent>
+			<xsl:if test="text()">
+				<dc:format.extent>
+					
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format.extent>
+			</xsl:if>
 		</xsl:for-each>
 
 		<xsl:for-each select="mods:form">
-			<dc:format.medium>
-				<!-- tmee mods 3.5 -->
-				<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-				<!-- ws 1.7 -->
-				<xsl:if test="@unit">
-					<xsl:value-of select="$unit"/>: 
-				</xsl:if>
-				<xsl:value-of select="."/>
-			</dc:format.medium>
+			<xsl:if test="text()">
+				<dc:format.medium>
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format.medium>
+			</xsl:if>
 		</xsl:for-each>	
 
 		<xsl:for-each select="mods:internetMediaType">
-			<dc:format>
-				<!-- tmee mods 3.5 -->
-				<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-				<!-- ws 1.7 -->
-				<xsl:if test="@unit">
-					<xsl:value-of select="$unit"/>: 
-				</xsl:if>
-				<xsl:value-of select="."/>
-			</dc:format>
+			<xsl:if test="text()">
+				<dc:format>
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format>
+			</xsl:if>
 		</xsl:for-each>	
 	</xsl:template>
 	<!--
@@ -469,9 +484,11 @@
 
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
-			<dc:identifier>
-				<xsl:value-of select="."/>
-			</dc:identifier>
+			<xsl:if test="text()">
+				<dc:identifier>
+					<xsl:value-of select="."/>
+				</dc:identifier>
+			</xsl:if>
 		</xsl:for-each>
 	</xsl:template>
 
