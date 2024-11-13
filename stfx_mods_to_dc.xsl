@@ -161,25 +161,25 @@
 			</dc:coverage>
 		</xsl:for-each>
 		<xsl:for-each select="mods:hierarchicalGeographic">
-			<dc:coverage>
+			<dc:coverage.spatial>
 				<xsl:for-each select="mods:continent|mods:country|mods:province|mods:region|mods:state|mods:territory|mods:county|mods:city|mods:island|mods:area">
 					<xsl:value-of select="."/>
 					<xsl:if test="position()!=last()">--</xsl:if>
 				</xsl:for-each>
-			</dc:coverage>
+			</dc:coverage.spatial>
 		</xsl:for-each>
 		<xsl:for-each select="mods:cartographics/*">
-			<dc:coverage>
+			<dc:coverage.spatial>
 				<xsl:value-of select="."/>
-			</dc:coverage>
+			</dc:coverage.spatial>
 		</xsl:for-each>
 		<xsl:if test="mods:temporal">
-			<dc:coverage>
+			<dc:coverage.temporal>
 				<xsl:for-each select="mods:temporal">
 					<xsl:value-of select="."/>
 					<xsl:if test="position()!=last()">-</xsl:if>
 				</xsl:for-each>
-			</dc:coverage>
+			</dc:coverage.temporal>
 		</xsl:if>
 		<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
 			<dc:subject>
