@@ -159,6 +159,7 @@
 	</xsl:template>
 
 	<!-- ws 1.7  -->
+	<!-- ws 1.7  -->
 	<xsl:template match="mods:subject">
 		<xsl:if test="mods:topic">
 			<xsl:for-each select="mods:topic">
@@ -168,20 +169,18 @@
 					</dc:subject>
 				</xsl:if>
 			</xsl:for-each>
-		</xsl:if>
-		<xsl:if test="mods:occupation | mods:name">
-			<xsl:if test="text()">
-				<dc:subject>
-					<xsl:for-each select="mods:occupation">
-						<xsl:value-of select="."/>
-						<xsl:if test="position()!=last()">--</xsl:if>
-					</xsl:for-each>
-					<xsl:for-each select="mods:name">
-						<xsl:call-template name="name"/>
-					</xsl:for-each>
-				</dc:subject>
-			</xsl:if>
 		</xsl:if>		
+		<xsl:if test="mods:occupation | mods:name">
+			<dc:subject>
+				<xsl:for-each select="mods:topic | mods:occupation">
+					<xsl:value-of select="."/>
+					<xsl:if test="position()!=last()">--</xsl:if>
+				</xsl:for-each>
+				<xsl:for-each select="mods:name">
+					<xsl:call-template name="name"/>
+				</xsl:for-each>
+			</dc:subject>
+		</xsl:if>
 		<xsl:for-each select="mods:titleInfo">
 			<dc:subject>
 				<xsl:for-each select="child::*">
@@ -198,29 +197,29 @@
 			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:hierarchicalGeographic">
-			<dc:coverage>
+			<dc:coverage.spatial>
 				<xsl:for-each select="mods:continent|mods:country|mods:province|mods:region|mods:state|mods:territory|mods:county|mods:city|mods:island|mods:area">
 					<xsl:value-of select="."/>
 					<xsl:if test="position()!=last()">--</xsl:if>
 				</xsl:for-each>
-			</dc:coverage>
+			</dc:coverage.spatial>
 		</xsl:for-each>
 		<xsl:for-each select="mods:cartographics/*">
-			<dc:coverage>
+			<dc:coverage.spatial>
 				<xsl:value-of select="."/>
-			</dc:coverage>
+			</dc:coverage.spatial>
 		</xsl:for-each>
 		<xsl:if test="mods:temporal">
-			<xsl:if test="text()">
-				<dc:coverage>
-					<xsl:for-each select="mods:temporal">
+			<xsl:for-each select="mods:temporal">
+				<xsl:if test="text()">
+					<dc:coverage.temporal>
 						<xsl:value-of select="."/>
 						<xsl:if test="position()!=last()">-</xsl:if>
-					</xsl:for-each>
-				</dc:coverage>
-			</xsl:if>
+					</dc:coverage.temporal>
+				</xsl:if>
+			</xsl:for-each>
 		</xsl:if>
-<!--		<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
+		<!--<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
 			<dc:subject>
 				<xsl:for-each select="*[local-name()!='cartographics' and local-name()!='geographicCode' and local-name()!='hierarchicalGeographic'] ">
 					<xsl:value-of select="."/>
@@ -229,6 +228,7 @@
 			</dc:subject>
 		</xsl:if>-->
 	</xsl:template>
+	
 
 	<xsl:template match="mods:note">
 		<xsl:if test="text()">

@@ -195,12 +195,14 @@
 			</dc:coverage.spatial>
 		</xsl:for-each>
 		<xsl:if test="mods:temporal">
-			<dc:coverage.temporal>
 				<xsl:for-each select="mods:temporal">
-					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">-</xsl:if>
+					<xsl:if test="text()">
+						<dc:coverage.temporal>
+							<xsl:value-of select="."/>
+							<xsl:if test="position()!=last()">-</xsl:if>
+						</dc:coverage.temporal>
+					</xsl:if>
 				</xsl:for-each>
-			</dc:coverage.temporal>
 		</xsl:if>
 		<!--<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
 			<dc:subject>
