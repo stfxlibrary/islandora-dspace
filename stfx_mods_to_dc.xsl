@@ -112,18 +112,18 @@
 				</dc:contributor.author>
 			</xsl:when>
 
-			<xsl:when test="mods:role/mods:roleTerm[@type='text']='creator' or mods:role/mods:roleTerm[@type='code']='cre' ">
-				<dc:creator>
+			<xsl:when test="mods:role/mods:roleTerm[@type='text']='creator' or mods:role/mods:roleTerm[@type='code']='cre' or mods:role/mods:roleTerm[@type='text']='Creator'">
+				<dc:contributor.author>
 					<xsl:call-template name="name"/>
-					<xsl:choose>
+<!--					<xsl:choose>
 						<xsl:when test="mods:etal">
 							<xsl:value-of select="."/>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:text>et al</xsl:text>
 						</xsl:otherwise>
-					</xsl:choose>
-				</dc:creator>
+					</xsl:choose>-->
+				</dc:contributor.author>
 			</xsl:when>
 			<xsl:otherwise>
 				<!-- ws  1.7 -->
@@ -477,11 +477,11 @@
 				<xsl:value-of select="mods:displayForm"/>
 				<xsl:text>) </xsl:text>
 			</xsl:if>
-			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']!='creator']">
+<!--			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']!='creator']">
 				<xsl:text> (</xsl:text>
 				<xsl:value-of select="normalize-space(child::*)"/>
 				<xsl:text>) </xsl:text>
-			</xsl:for-each>
+			</xsl:for-each>-->
 		</xsl:variable>
 		<xsl:value-of select="normalize-space($name)"/>
 	</xsl:template>
