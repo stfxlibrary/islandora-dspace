@@ -485,9 +485,16 @@
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
 			<xsl:if test="text()">
-				<dc:identifier>
-					<xsl:value-of select="."/>
-				</dc:identifier>
+				<xsl:choose>
+					<xsl:when test="contains(text(),'cairnrepo.org')">
+						
+					</xsl:when>
+					<xsl:otherwise>
+						<dc:identifier>
+							<xsl:value-of select="."/>
+						</dc:identifier>
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:physicalLocation">
