@@ -348,19 +348,19 @@
 			<dc:type>Image</dc:type>
 		</xsl:if>
 		<xsl:if test=".='multimedia'">
-			<dc:type>InteractiveResource</dc:type>
+			<dc:type>Interactive Resource</dc:type>
 		</xsl:if>
 		<xsl:if test=".='moving image'">
-			<dc:type>MovingImage</dc:type>
+			<dc:type>Moving Image</dc:type>
 		</xsl:if>
 		<xsl:if test=".='three dimensional object'">
-			<dc:type>PhysicalObject</dc:type>
+			<dc:type>Physical Object</dc:type>
 		</xsl:if>
 		<xsl:if test="starts-with(.,'sound recording')">
 			<dc:type>Sound</dc:type>
 		</xsl:if>
 		<xsl:if test=".='still image'">
-			<dc:type>StillImage</dc:type>
+			<dc:type>Still Image</dc:type>
 		</xsl:if>
 		<xsl:if test=". ='text'">
 			<dc:type>Text</dc:type>
