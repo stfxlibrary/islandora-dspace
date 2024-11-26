@@ -115,7 +115,7 @@
 				</dc:contributor.author>
 			</xsl:when>
 
-			<xsl:when test="mods:role/mods:roleTerm[@type='text']='creator' or mods:role/mods:roleTerm[@type='code']='cre' or mods:role/mods:roleTerm[@type='text']='Creator'">
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='creator' or mods:role/mods:roleTerm[@type='code']='cre'">
 				<dc:contributor.author>
 					<xsl:call-template name="name"/>
 <!--					<xsl:choose>
