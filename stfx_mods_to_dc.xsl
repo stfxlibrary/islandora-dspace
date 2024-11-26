@@ -109,7 +109,7 @@
 	<xsl:template match="mods:name">
 		<xsl:choose>
 			<!-- StFX: Change mods:roletype author to dc.contributor.author -->
-			<xsl:when test="mods:role/mods:roleTerm[@type='text']='author'">
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='author'">
 				<dc:contributor.author>
 					<xsl:call-template name="name"/>
 				</dc:contributor.author>
