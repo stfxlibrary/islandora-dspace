@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3" exclude-result-prefixes="mods" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:srw_dc="info:srw/schema/1/dc-schema" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3" exclude-result-prefixes="mods" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:srw_dc="info:srw/schema/1/dc-schema" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:oaire="http://namespace.openaire.eu/schema/oaire/">
 
 	<!-- 
     Version 1.8		2015-03-05 tmee@loc.gov
@@ -509,6 +509,11 @@
 
 	<xsl:template match="mods:relatedItem[mods:titleInfo | mods:name | mods:identifier | mods:location]">
 		<xsl:choose>
+			<xsl:when test="@type='host'">
+				<oaire.citation.title>
+					<xsl:value-of select="*"/>
+				</oaire.citation.title>
+			</xsl:when>
 			<xsl:when test="@type='original'">
 				<dc:source>
 					<xsl:for-each select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
