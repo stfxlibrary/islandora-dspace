@@ -83,25 +83,34 @@
 	
 	<xsl:template match="mods:titleInfo">
 		<xsl:if test="mods:title/text()">
-			<dc:title>
-				<xsl:value-of select="mods:nonSort"/>
-				<xsl:if test="mods:nonSort">
-					<xsl:text> </xsl:text>
-				</xsl:if>
-				<xsl:value-of select="mods:title"/>
-				<xsl:if test="mods:subTitle/text()">
-					<xsl:text>: </xsl:text>
-					<xsl:value-of select="mods:subTitle"/>
-				</xsl:if>
-				<xsl:if test="mods:partNumber">
-					<xsl:text>. </xsl:text>
-					<xsl:value-of select="mods:partNumber"/>
-				</xsl:if>
-				<xsl:if test="mods:partName">
-					<xsl:text>. </xsl:text>
-					<xsl:value-of select="mods:partName"/>
-				</xsl:if>
-			</dc:title>
+			<xsl:choose>
+				<xsl:when test="@type = 'alternative'">
+					<dc:title.alternative>
+						<xsl:value-of select="*"/>
+					</dc:title.alternative>
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:title>
+						<xsl:value-of select="mods:nonSort"/>
+						<xsl:if test="mods:nonSort">
+							<xsl:text> </xsl:text>
+						</xsl:if>
+						<xsl:value-of select="mods:title"/>
+						<xsl:if test="mods:subTitle/text() and not(contains(mods:title/text(), ': '))">
+							<xsl:text>: </xsl:text>
+							<xsl:value-of select="mods:subTitle"/>
+						</xsl:if>
+						<xsl:if test="mods:partNumber">
+							<xsl:text>. </xsl:text>
+							<xsl:value-of select="mods:partNumber"/>
+						</xsl:if>
+						<xsl:if test="mods:partName">
+							<xsl:text>. </xsl:text>
+							<xsl:value-of select="mods:partName"/>
+						</xsl:if>
+					</dc:title>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
 
