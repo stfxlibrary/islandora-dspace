@@ -96,7 +96,7 @@
 							<xsl:text> </xsl:text>
 						</xsl:if>
 						<xsl:value-of select="mods:title"/>
-						<xsl:if test="mods:subTitle/text() and not(contains(mods:title/text(), ': '))">
+						<xsl:if test="mods:subTitle/text()">
 							<xsl:text>: </xsl:text>
 							<xsl:value-of select="mods:subTitle"/>
 						</xsl:if>
