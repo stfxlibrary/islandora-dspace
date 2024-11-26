@@ -571,10 +571,12 @@
 				<xsl:value-of select="mods:displayForm"/>
 				<xsl:text>) </xsl:text>
 			</xsl:if>
-			<xsl:for-each select="mods:role[translate(mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')!='creator']">
-				<xsl:text> (</xsl:text>
-				<xsl:value-of select="normalize-space(child::*)"/>
-				<xsl:text>) </xsl:text>
+			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']]">
+				<xsl:if test="not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'author')) and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contributor')) and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'creator'))">
+					<xsl:text> (</xsl:text>
+					<xsl:value-of select="normalize-space(child::*)"/>
+					<xsl:text>) </xsl:text>
+				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:value-of select="normalize-space($name)"/>
