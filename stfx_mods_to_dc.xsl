@@ -571,7 +571,7 @@
 				<xsl:value-of select="mods:displayForm"/>
 				<xsl:text>) </xsl:text>
 			</xsl:if>
-			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']!='creator']">
+			<xsl:for-each select="mods:role[translate(mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')!='creator']">
 				<xsl:text> (</xsl:text>
 				<xsl:value-of select="normalize-space(child::*)"/>
 				<xsl:text>) </xsl:text>
