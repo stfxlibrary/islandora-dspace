@@ -380,6 +380,7 @@
 	</xsl:template>
 	
 	<xsl:template match="mods:physicalDescription">
+		<dc.type><xsl:value-of select="."/></dc.type>
 		
 		<xsl:for-each select="mods:extent">
 			<xsl:if test="text()">
@@ -581,8 +582,8 @@
 	<xsl:template match="mods:accessCondition">
 		<xsl:variable name="contact_author" select="."></xsl:variable>
 		<xsl:choose>
-			<xsl:when test="(@displayLabel='License') and ($contact_author='Contact Author')">
-				<dc:rights.holder>Author</dc:rights.holder>
+			<xsl:when test="(@displayLabel='License')">
+				<dc:rights.holder><xsl:value-of select="."/></dc:rights.holder>
 			</xsl:when>
 			<xsl:when test="(@displayLabel='Permission Statement')">
 				<dc:rights>
