@@ -437,7 +437,7 @@
 			<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 			<xsl:choose>
 				<!-- 2.0: added identifier type attribute to output, if it is present-->
-
+				
 				<!-- ws 1.7  -->
 				<xsl:when test="@type">
 					<xsl:choose>		
@@ -450,12 +450,7 @@
 							<dc:subject.discipline>
 								<xsl:value-of select="."/>
 							</dc:subject.discipline>
-						</xsl:when>							
-						<xsl:when test="@type">
-							<dc:identifier>
-								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-							</dc:identifier>
-						</xsl:when>						
+						</xsl:when>											
 						<xsl:when test="contains ('doi', $type)">
 							<dc:identifier.doi>
 								<xsl:value-of select="."/>
@@ -477,9 +472,9 @@
 							</dc:identifier.lccn>
 						</xsl:when>
 						<xsl:otherwise>
-								<dc:identifier>
-									<xsl:value-of select="."/>
-								</dc:identifier>	
+							<dc:identifier>
+								<xsl:value-of select="."/>
+							</dc:identifier>	
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>

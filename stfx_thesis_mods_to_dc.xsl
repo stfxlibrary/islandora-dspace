@@ -441,36 +441,45 @@
 			<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 			<xsl:choose>
 				<!-- 2.0: added identifier type attribute to output, if it is present-->
-				<xsl:when test="contains(.,':')">
-					<dc:identifier>
-						<xsl:value-of select="."/>
-					</dc:identifier>	
-				</xsl:when>
+				
 				<!-- ws 1.7  -->
 				<xsl:when test="@type">
-					<xsl:choose>
-						<xsl:when test="contains ('school department cbu-school', $type)">
-						</xsl:when>
-						<xsl:when test="contains ('cbu-department', $type)">
-							<dc:subject.discipline>
+					<xsl:choose>		
+						<xsl:when test="contains ('school cbu-school', $type)">
+							<dc:subject>
 								<xsl:value-of select="."/>
-							</dc:subject.discipline>
+							</dc:subject>
 						</xsl:when>
 						<xsl:when test="contains ('department cbu-department', $type)">
 							<dc:subject.discipline>
 								<xsl:value-of select="."/>
 							</dc:subject.discipline>
-						</xsl:when>							
-						<xsl:when test="@type">
-							<dc:identifier>
-								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-							</dc:identifier>
+						</xsl:when>											
+						<xsl:when test="contains ('doi', $type)">
+							<dc:identifier.doi>
+								<xsl:value-of select="."/>
+							</dc:identifier.doi>
 						</xsl:when>
-						<xsl:when test="contains ('isbn issn uri doi lccn uri', $type)">
-							<dc:identifier>
-								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-							</dc:identifier>
+						<xsl:when test="contains ('isbn', $type)">
+							<dc:identifier.isbn>
+								<xsl:value-of select="."/>
+							</dc:identifier.isbn>
 						</xsl:when>
+						<xsl:when test="contains ('uri', $type)">
+							<dc:identifier.uri>
+								<xsl:value-of select="."/>
+							</dc:identifier.uri>
+						</xsl:when>
+						<xsl:when test="contains ('lccn', $type)">
+							<dc:identifier.lccn>
+								<xsl:value-of select="."/>
+							</dc:identifier.lccn>
+						</xsl:when>
+						<xsl:otherwise>
+							<dc:identifier>
+								<xsl:value-of select="."/>
+							</dc:identifier>	
+						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
 				<xsl:otherwise>

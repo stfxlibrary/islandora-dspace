@@ -450,12 +450,7 @@
 							<dc:subject.discipline>
 								<xsl:value-of select="."/>
 							</dc:subject.discipline>
-						</xsl:when>							
-						<xsl:when test="@type">
-							<dc:identifier>
-								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-							</dc:identifier>
-						</xsl:when>						
+						</xsl:when>											
 						<xsl:when test="contains ('doi', $type)">
 							<dc:identifier.doi>
 								<xsl:value-of select="."/>
