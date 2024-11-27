@@ -249,7 +249,41 @@
 			</dc:description>
 		</xsl:if>
 	</xsl:template>	
+
+	<xsl:template match="mods:part">
+		<xsl:for-each select="mods:extent">
+			<xsl:if test="mods:start/text()">
+				<oaire:citation.startPage>
+					<xsl:value-of select="mods:start"/>
+				</oaire:citation.startPage>
+			</xsl:if>
+			<xsl:if test="mods:end/text()">
+				<oaire:citation.endPage>
+					<xsl:value-of select="mods:end"/>
+				</oaire:citation.endPage>
+			</xsl:if>			
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:detail[@type='volume']">
+				<oaire:citation.volume>
+					<xsl:value-of select="."/>
+				</oaire:citation.volume>		
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:detail[@type='issue']">
+			<oaire:citation.issue>
+				<xsl:value-of select="."/>
+			</oaire:citation.issue>		
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:date">
+			<dc:date.issued>
+				<xsl:value-of select="."/>
+			</dc:date.issued>		
+		</xsl:for-each>				
+	</xsl:template>	
 	
+
 	<xsl:template match="mods:abstract">
 		<dc:description.abstract>
 			<xsl:value-of select="."/>
