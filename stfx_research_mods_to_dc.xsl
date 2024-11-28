@@ -508,7 +508,7 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<dc:identifier>
-								<xsl:value-of select="."/>
+							<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
 							</dc:identifier>	
 						</xsl:otherwise>
 					</xsl:choose>
@@ -578,11 +578,23 @@
 				</xsl:for-each>
 				
 				<xsl:for-each select="mods:identifier">
-					<xsl:if test="normalize-space(.)!= ''">
-						<dc:identifier.issn>
-							<xsl:value-of select="."/>
-						</dc:identifier.issn>
-					</xsl:if>
+					<xsl:choose>
+						<xsl:when test="normalize-space(.)!= '' and @type='issn'">
+							<dc:identifier.issn>
+								<xsl:value-of select="."/>
+							</dc:identifier.issn>
+						</xsl:when>
+						<xsl:when test="normalize-space(.)!= '' and @type='isbn'">
+							<dc:identifier.isbn>
+								<xsl:value-of select="."/>
+							</dc:identifier.isbn>
+						</xsl:when>
+						<xsl:otherwise>
+							<dc:identifier>
+								<xsl:value-of select="@type"/>: <xsl:value-of select="."/>
+							</dc:identifier>
+						</xsl:otherwise>	
+					</xsl:choose>
 				</xsl:for-each>				
 
 				

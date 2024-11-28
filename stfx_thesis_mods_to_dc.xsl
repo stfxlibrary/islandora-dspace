@@ -477,7 +477,7 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<dc:identifier>
-								<xsl:value-of select="."/>
+								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
 							</dc:identifier>	
 						</xsl:otherwise>
 					</xsl:choose>

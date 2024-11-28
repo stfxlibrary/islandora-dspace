@@ -473,7 +473,7 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<dc:identifier>
-								<xsl:value-of select="."/>
+								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
 							</dc:identifier>	
 						</xsl:otherwise>
 					</xsl:choose>
@@ -486,7 +486,6 @@
 			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
-
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
 			<xsl:if test="text()">
