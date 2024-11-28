@@ -114,6 +114,7 @@
 		</xsl:if>
 	</xsl:template>
 
+
 	<!-- tmee mods 3.5 -->
 	<xsl:template match="mods:name">
 		<xsl:choose>
@@ -123,25 +124,22 @@
 					<xsl:call-template name="name"/>
 				</dc:contributor.author>
 			</xsl:when>
-
+			
 			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='creator' or mods:role/mods:roleTerm[@type='code']='cre'">
 				<dc:contributor.author>
 					<xsl:call-template name="name"/>
-<!--					<xsl:choose>
-						<xsl:when test="mods:etal">
-							<xsl:value-of select="."/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>et al</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>-->
 				</dc:contributor.author>
 			</xsl:when>
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='editor'">
+				<dc:contributor.editor>
+					<xsl:call-template name="name"/>
+				</dc:contributor.editor>
+			</xsl:when>			
 			<xsl:otherwise>
 				<!-- ws  1.7 -->
 				<dc:contributor>
 					<xsl:call-template name="name"/>
-						<xsl:if test="mods:etal">et al.</xsl:if>
+					<xsl:if test="mods:etal">et al.</xsl:if>
 				</dc:contributor>
 			</xsl:otherwise>
 		</xsl:choose>
