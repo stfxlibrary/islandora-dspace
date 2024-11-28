@@ -491,6 +491,9 @@
 		</xsl:if>
 	</xsl:template>
 
+
+
+
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
 			<xsl:if test="text()">
@@ -499,9 +502,9 @@
 						
 					</xsl:when>
 					<xsl:otherwise>
-						<dc:identifier>
+						<dc:identifier.uri>
 							<xsl:value-of select="."/>
-						</dc:identifier>
+						</dc:identifier.uri>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:if>
