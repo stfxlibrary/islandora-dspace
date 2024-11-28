@@ -115,7 +115,7 @@
 	</xsl:template>
 
 	<!-- tmee mods 3.5 -->
-	<xsl:template match="mods:name">
+	<xsl:template match="mods:name" name="mods-name">
 		<xsl:choose>
 			<!-- StFX: Change mods:roletype author to dc.contributor.author -->
 			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='author'">
@@ -285,8 +285,9 @@
 		<dc:description.abstract>
 			<xsl:value-of select="."/>
 		</dc:description.abstract>
-	</xsl:template>	
-	<xsl:template match="mods:originInfo">
+	</xsl:template>
+	
+	<xsl:template match="mods:originInfo" name="originInfo">
 		<xsl:apply-templates select="*[@point='start']"/>
 		<xsl:apply-templates select="*[not(@point)]"/>
 		<xsl:for-each select="mods:publisher">
@@ -464,7 +465,7 @@
 		</dc:format>
 	</xsl:template>
 -->
-	<xsl:template match="mods:identifier">
+	<xsl:template match="mods:identifier" name="mods-identifier">
 		<xsl:if test="text()">
 			<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 			<xsl:choose>
@@ -493,6 +494,11 @@
 								<xsl:value-of select="."/>
 							</dc:identifier.isbn>
 						</xsl:when>
+						<xsl:when test="contains ('issn', $type)">
+							<dc:identifier.issn>
+								<xsl:value-of select="."/>
+							</dc:identifier.issn>
+						</xsl:when>						
 						<xsl:when test="contains ('uri', $type)">
 							<dc:identifier.uri>
 								<xsl:value-of select="."/>
@@ -522,9 +528,9 @@
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
 			<xsl:if test="text()">
-				<dc:identifier>
+				<dc:identifier.uri>
 					<xsl:value-of select="."/>
-				</dc:identifier>
+				</dc:identifier.uri>
 			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:physicalLocation">
@@ -560,7 +566,7 @@
 		
 	</xsl:template>
 
-	<xsl:template match="mods:relatedItem[mods:titleInfo | mods:name | mods:identifier | mods:location]">
+	<xsl:template match="mods:relatedItem[mods:titleInfo | mods:name | mods:identifier | mods:location | mods:originInfo]">
 		<xsl:choose>
 			
 			
@@ -573,55 +579,15 @@
 						</oaire:citation.title>
 					</xsl:if>
 				</xsl:for-each>
-				
-				
+								
 				<xsl:for-each select="mods:identifier">
-					<xsl:choose>
-						<xsl:when test="normalize-space(.)!= '' and @type='issn'">
-							<dc:identifier.issn>
-								<xsl:value-of select="."/>
-							</dc:identifier.issn>
-						</xsl:when>
-						<xsl:when test="normalize-space(.)!= '' and @type='isbn'">
-							<dc:identifier.isbn>
-								<xsl:value-of select="."/>
-							</dc:identifier.isbn>
-						</xsl:when>
-						<xsl:otherwise>
-							<dc:identifier>
-								<xsl:value-of select="@type"/>: <xsl:value-of select="."/>
-							</dc:identifier>
-						</xsl:otherwise>	
-					</xsl:choose>
+					<xsl:call-template name="mods-identifier"/>
 				</xsl:for-each>
+			
+				
+				<xsl:call-template name="originInfo" />
 
-				<xsl:for-each select="mods:name">
-					<xsl:choose>
-						<!-- StFX: Change mods:roletype author to dc.contributor.author -->
-						<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='author'">
-							<dc:contributor.author>
-								<xsl:call-template name="name"/>
-							</dc:contributor.author>
-						</xsl:when>
-						<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='creator' or mods:role/mods:roleTerm[@type='code']='cre'">
-							<dc:contributor.author>
-								<xsl:call-template name="name"/>
-							</dc:contributor.author>
-						</xsl:when>
-						<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='editor'">
-							<dc:contributor.editor>
-								<xsl:call-template name="name"/>
-							</dc:contributor.editor>
-						</xsl:when>			
-						<xsl:otherwise>
-							<!-- ws  1.7 -->
-							<dc:contributor>
-								<xsl:call-template name="name"/>
-								<xsl:if test="mods:etal">et al.</xsl:if>
-							</dc:contributor>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:for-each>
+				<xsl:call-template name="mods-name"/>
 
 				
 			</xsl:when>
