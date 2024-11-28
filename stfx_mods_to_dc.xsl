@@ -487,9 +487,9 @@
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
 			<xsl:if test="text()">
-				<dc:identifier>
+				<dc:identifier.uri>
 					<xsl:value-of select="."/>
-				</dc:identifier>
+				</dc:identifier.uri>
 			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:physicalLocation">
