@@ -127,16 +127,13 @@
 			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='creator' or mods:role/mods:roleTerm[@type='code']='cre'">
 				<dc:contributor.author>
 					<xsl:call-template name="name"/>
-<!--					<xsl:choose>
-						<xsl:when test="mods:etal">
-							<xsl:value-of select="."/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>et al</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>-->
 				</dc:contributor.author>
 			</xsl:when>
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='editor'">
+				<dc:contributor.editor>
+					<xsl:call-template name="name"/>
+				</dc:contributor.editor>
+			</xsl:when>			
 			<xsl:otherwise>
 				<!-- ws  1.7 -->
 				<dc:contributor>
@@ -577,6 +574,7 @@
 					</xsl:if>
 				</xsl:for-each>
 				
+				
 				<xsl:for-each select="mods:identifier">
 					<xsl:choose>
 						<xsl:when test="normalize-space(.)!= '' and @type='issn'">
@@ -595,7 +593,35 @@
 							</dc:identifier>
 						</xsl:otherwise>	
 					</xsl:choose>
-				</xsl:for-each>				
+				</xsl:for-each>
+
+				<xsl:for-each select="mods:name">
+					<xsl:choose>
+						<!-- StFX: Change mods:roletype author to dc.contributor.author -->
+						<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='author'">
+							<dc:contributor.author>
+								<xsl:call-template name="name"/>
+							</dc:contributor.author>
+						</xsl:when>
+						<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='creator' or mods:role/mods:roleTerm[@type='code']='cre'">
+							<dc:contributor.author>
+								<xsl:call-template name="name"/>
+							</dc:contributor.author>
+						</xsl:when>
+						<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='editor'">
+							<dc:contributor.editor>
+								<xsl:call-template name="name"/>
+							</dc:contributor.editor>
+						</xsl:when>			
+						<xsl:otherwise>
+							<!-- ws  1.7 -->
+							<dc:contributor>
+								<xsl:call-template name="name"/>
+								<xsl:if test="mods:etal">et al.</xsl:if>
+							</dc:contributor>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:for-each>
 
 				
 			</xsl:when>
@@ -671,7 +697,11 @@
 				<xsl:text>) </xsl:text>
 			</xsl:if>
 			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']]">
-				<xsl:if test="not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'author')) and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contributor')) and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'creator'))">
+				<xsl:if test="
+					not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'author')) 
+					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contributor')) 
+					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'creator'))
+					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'editor'))">
 					<xsl:text> (</xsl:text>
 					<xsl:value-of select="normalize-space(child::*)"/>
 					<xsl:text>) </xsl:text>
