@@ -15,6 +15,7 @@
   <ds-dso-edit-menu></ds-dso-edit-menu>
 </div>
 <div class="row">
+	<!-- Column 1 -->
   <div class="col-xs-12 col-md-4">
     <ng-container *ngIf="!(mediaViewer.image || mediaViewer.video)">
       <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
@@ -49,6 +50,7 @@
       [label]="'item.page.publisher'">
     </ds-generic-item-page-field>
   </div>
+  <!-- Column 2 -->
   <div class="col-xs-12 col-md-6">
     <ds-item-page-abstract-field [item]="object"></ds-item-page-abstract-field>
     <ds-generic-item-page-field [item]="object"
