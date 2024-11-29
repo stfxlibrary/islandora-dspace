@@ -144,7 +144,7 @@
 					<xsl:call-template name="name"/>
 				</dc:contributor.author>
 			</xsl:when>
-			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='Thesis advisor'">
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='thesis advisor'">
 				<dc:contributor.advisor>
 					<xsl:call-template name="name"/>
 				</dc:contributor.advisor>
