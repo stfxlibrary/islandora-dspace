@@ -55,6 +55,7 @@
 
 -->
 
+	<xsl:strip-space elements="*"/>
 	<xsl:output method="xml" indent="yes"/>
 
 	<xsl:template match="/">
@@ -79,50 +80,66 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
+	
 	<xsl:template match="mods:titleInfo">
-		<dc:title>
-			<xsl:value-of select="mods:nonSort"/>
-			<xsl:if test="mods:nonSort">
-				<xsl:text> </xsl:text>
-			</xsl:if>
-			<xsl:value-of select="mods:title"/>
-			<xsl:if test="mods:subTitle">
-				<xsl:text>: </xsl:text>
-				<xsl:value-of select="mods:subTitle"/>
-			</xsl:if>
-			<xsl:if test="mods:partNumber">
-				<xsl:text>. </xsl:text>
-				<xsl:value-of select="mods:partNumber"/>
-			</xsl:if>
-			<xsl:if test="mods:partName">
-				<xsl:text>. </xsl:text>
-				<xsl:value-of select="mods:partName"/>
-			</xsl:if>
-		</dc:title>
+		<xsl:if test="mods:title/text()">
+			<xsl:choose>
+				<xsl:when test="@type = 'alternative'">
+					<dc:title.alternative>
+						<xsl:value-of select="*"/>
+					</dc:title.alternative>
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:title>
+						<xsl:value-of select="mods:nonSort"/>
+						<xsl:if test="mods:nonSort">
+							<xsl:text> </xsl:text>
+						</xsl:if>
+						<xsl:value-of select="mods:title"/>
+						<xsl:if test="mods:subTitle/text()">
+							<xsl:text>: </xsl:text>
+							<xsl:value-of select="mods:subTitle"/>
+						</xsl:if>
+						<xsl:if test="mods:partNumber">
+							<xsl:text>. </xsl:text>
+							<xsl:value-of select="mods:partNumber"/>
+						</xsl:if>
+						<xsl:if test="mods:partName">
+							<xsl:text>. </xsl:text>
+							<xsl:value-of select="mods:partName"/>
+						</xsl:if>
+					</dc:title>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
+
 
 	<!-- tmee mods 3.5 -->
 	<xsl:template match="mods:name">
 		<xsl:choose>
-			<xsl:when test="mods:role/mods:roleTerm[@type='text']='creator' or mods:role/mods:roleTerm[@type='code']='cre' ">
-				<dc:creator>
+			<!-- StFX: Change mods:roletype author to dc.contributor.author -->
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='author'">
+				<dc:contributor.author>
 					<xsl:call-template name="name"/>
-					<xsl:choose>
-						<xsl:when test="mods:etal">
-							<xsl:value-of select="."/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>et al</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-				</dc:creator>
+				</dc:contributor.author>
 			</xsl:when>
+			
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='creator' or mods:role/mods:roleTerm[@type='code']='cre'">
+				<dc:contributor.author>
+					<xsl:call-template name="name"/>
+				</dc:contributor.author>
+			</xsl:when>
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='editor'">
+				<dc:contributor.editor>
+					<xsl:call-template name="name"/>
+				</dc:contributor.editor>
+			</xsl:when>			
 			<xsl:otherwise>
 				<!-- ws  1.7 -->
 				<dc:contributor>
 					<xsl:call-template name="name"/>
-						<xsl:if test="mods:etal">et al.</xsl:if>
+					<xsl:if test="mods:etal">et al.</xsl:if>
 				</dc:contributor>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -136,7 +153,16 @@
 
 	<!-- ws 1.7  -->
 	<xsl:template match="mods:subject">
-		<xsl:if test="mods:topic | mods:occupation | mods:name">
+		<xsl:if test="mods:topic">
+			<xsl:for-each select="mods:topic">
+				<xsl:if test="text()">
+					<dc:subject>
+						<xsl:value-of select="."/>
+					</dc:subject>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:if>		
+		<xsl:if test="mods:occupation | mods:name">
 			<dc:subject>
 				<xsl:for-each select="mods:topic | mods:occupation">
 					<xsl:value-of select="."/>
@@ -156,47 +182,77 @@
 			</dc:subject>
 		</xsl:for-each>
 		<xsl:for-each select="mods:geographic">
-			<dc:coverage>
-				<xsl:value-of select="."/>
-			</dc:coverage>
+			<xsl:if test="text()">
+				<dc:coverage>
+					<xsl:value-of select="."/>
+				</dc:coverage>
+			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:hierarchicalGeographic">
-			<dc:coverage>
+			<dc:coverage.spatial>
 				<xsl:for-each select="mods:continent|mods:country|mods:province|mods:region|mods:state|mods:territory|mods:county|mods:city|mods:island|mods:area">
 					<xsl:value-of select="."/>
 					<xsl:if test="position()!=last()">--</xsl:if>
 				</xsl:for-each>
-			</dc:coverage>
+			</dc:coverage.spatial>
 		</xsl:for-each>
 		<xsl:for-each select="mods:cartographics/*">
-			<dc:coverage>
+			<dc:coverage.spatial>
 				<xsl:value-of select="."/>
-			</dc:coverage>
+			</dc:coverage.spatial>
 		</xsl:for-each>
 		<xsl:if test="mods:temporal">
-			<dc:coverage>
 				<xsl:for-each select="mods:temporal">
-					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">-</xsl:if>
+					<xsl:if test="text()">
+						<dc:coverage.temporal>
+							<xsl:value-of select="."/>
+							<xsl:if test="position()!=last()">-</xsl:if>
+						</dc:coverage.temporal>
+					</xsl:if>
 				</xsl:for-each>
-			</dc:coverage>
 		</xsl:if>
-		<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
+		<!--<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
 			<dc:subject>
 				<xsl:for-each select="*[local-name()!='cartographics' and local-name()!='geographicCode' and local-name()!='hierarchicalGeographic'] ">
 					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">--</xsl:if>
+					<xsl:if test="position()!=last()">-\-</xsl:if>
 				</xsl:for-each>
 			</dc:subject>
+		</xsl:if>-->
+	</xsl:template>
+
+
+	<xsl:template match="mods:note">
+		<xsl:if test="text()">		
+			<xsl:variable name="note" select="."/>
+			<xsl:choose>
+				<xsl:when test="contains($note,'Print copy') = true()">
+					<dc:relation>
+						<xsl:value-of select="."/>
+					</dc:relation>				
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:description>
+						<xsl:value-of select="."/>
+					</dc:description>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
-
-	<xsl:template match="mods:abstract | mods:tableOfContents | mods:note">
-		<dc:description>
+	
+	<xsl:template match="mods:tableOfContents">
+		<xsl:if test="text()">
+			<dc:description>
+				<xsl:value-of select="."/>
+			</dc:description>
+		</xsl:if>
+	</xsl:template>	
+	
+	<xsl:template match="mods:abstract">
+		<dc:description.abstract>
 			<xsl:value-of select="."/>
-		</dc:description>
-	</xsl:template>
-
+		</dc:description.abstract>
+	</xsl:template>	
 	<xsl:template match="mods:originInfo">
 		<xsl:apply-templates select="*[@point='start']"/>
 		<xsl:apply-templates select="*[not(@point)]"/>
@@ -207,7 +263,7 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template match="mods:dateIssued | mods:dateCreated | mods:dateCaptured">
+	<xsl:template match="mods:dateCreated | mods:dateCaptured">
 		<dc:date>
 			<xsl:choose>
 				<xsl:when test="@point='start'">
@@ -223,14 +279,40 @@
 			</xsl:choose>
 		</dc:date>
 	</xsl:template>
-
-	<xsl:template match="mods:dateIssued[@point='start'] | mods:dateCreated[@point='start'] | mods:dateCaptured[@point='start'] | mods:dateOther[@point='start'] ">
+	
+	<xsl:template match="mods:dateCreated[@point='start'] | mods:dateCaptured[@point='start'] | mods:dateOther[@point='start'] ">
 		<xsl:variable name="dateName" select="local-name()"/>
 		<dc:date>
 			<xsl:value-of select="."/>-<xsl:value-of select="../*[local-name()=$dateName][@point='end']"/>
 		</dc:date>
 	</xsl:template>
-
+	
+	<xsl:template match="mods:dateIssued">
+		<xsl:if test="text()">
+			<dc:date.issued>
+				<xsl:choose>
+					<xsl:when test="@point='start'">
+						<xsl:value-of select="."/>
+						<xsl:text> - </xsl:text>
+					</xsl:when>
+					<xsl:when test="@point='end'">
+						<xsl:value-of select="."/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="."/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</dc:date.issued>
+		</xsl:if>
+	</xsl:template>
+	
+	
+	<xsl:template match="mods:dateIssued[@point='start']">
+		<xsl:variable name="dateName" select="local-name()"/>
+		<dc:date.issued>
+			<xsl:value-of select="."/>-<xsl:value-of select="../*[local-name()=$dateName][@point='end']"/>
+		</dc:date.issued>
+	</xsl:template>
 	<xsl:template match="mods:temporal[@point='start']  ">
 		<xsl:value-of select="."/>-<xsl:value-of select="../mods:temporal[@point='end']"/>
 	</xsl:template>
@@ -239,19 +321,21 @@
 		<xsl:value-of select="."/>
 	</xsl:template>
 	<xsl:template match="mods:genre">
-		<xsl:choose>
-			<xsl:when test="@authority='dct'">
-				<dc:type>
-					<xsl:value-of select="."/>
-				</dc:type>
-			</xsl:when>
-			<xsl:otherwise>
-				<dc:type>
-					<xsl:value-of select="."/>
-				</dc:type>
-				<xsl:apply-templates select="mods:typeOfResource"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:if test="text()">
+			<xsl:choose>
+				<xsl:when test="@authority='dct'">
+					<dc:type>
+						<xsl:value-of select="."/>
+					</dc:type>
+				</xsl:when>
+				<xsl:otherwise>
+					<dc:type>
+						<xsl:value-of select="."/>
+					</dc:type>
+					<xsl:apply-templates select="mods:typeOfResource"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="mods:typeOfResource">
@@ -271,19 +355,19 @@
 			<dc:type>Image</dc:type>
 		</xsl:if>
 		<xsl:if test=".='multimedia'">
-			<dc:type>InteractiveResource</dc:type>
+			<dc:type>Interactive Resource</dc:type>
 		</xsl:if>
 		<xsl:if test=".='moving image'">
-			<dc:type>MovingImage</dc:type>
+			<dc:type>Moving Image</dc:type>
 		</xsl:if>
 		<xsl:if test=".='three dimensional object'">
-			<dc:type>PhysicalObject</dc:type>
+			<dc:type>Physical Object</dc:type>
 		</xsl:if>
 		<xsl:if test="starts-with(.,'sound recording')">
 			<dc:type>Sound</dc:type>
 		</xsl:if>
 		<xsl:if test=".='still image'">
-			<dc:type>StillImage</dc:type>
+			<dc:type>Still Image</dc:type>
 		</xsl:if>
 		<xsl:if test=". ='text'">
 			<dc:type>Text</dc:type>
@@ -292,20 +376,53 @@
 			<dc:type>Text</dc:type>
 		</xsl:if>
 	</xsl:template>
-
+	
 	<xsl:template match="mods:physicalDescription">
-		<xsl:for-each select="mods:extent | mods:form | mods:internetMediaType">
-			<dc:format>
-				<!-- tmee mods 3.5 -->
-				<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-				<!-- ws 1.7 -->
-				<xsl:if test="@unit">
-					<xsl:value-of select="$unit"/>: 
-				</xsl:if>
-				<xsl:value-of select="."/>
-			</dc:format>
+		
+		<xsl:for-each select="mods:extent">
+			<xsl:if test="text()">
+				<dc:format.extent>
+					
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format.extent>
+			</xsl:if>
 		</xsl:for-each>
+		
+		<xsl:for-each select="mods:form">
+			<xsl:if test="text()">
+				<dc:format.medium>
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format.medium>
+			</xsl:if>
+		</xsl:for-each>	
+		
+		<xsl:for-each select="mods:internetMediaType">
+			<xsl:if test="text()">
+				<dc:format>
+					<!-- tmee mods 3.5 -->
+					<xsl:variable name="unit" select="translate(@unit,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+					<!-- ws 1.7 -->
+					<xsl:if test="@unit">
+						<xsl:value-of select="$unit"/>: 
+					</xsl:if>
+					<xsl:value-of select="."/>
+				</dc:format>
+			</xsl:if>
+		</xsl:for-each>	
 	</xsl:template>
+	
 	<!--
 	<xsl:template match="mods:mimeType">
 		<dc:format>
@@ -314,43 +431,98 @@
 	</xsl:template>
 -->
 	<xsl:template match="mods:identifier">
-		<dc:identifier>
+		<xsl:if test="text()">
 			<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 			<xsl:choose>
 				<!-- 2.0: added identifier type attribute to output, if it is present-->
-				<xsl:when test="contains(.,':')">
-					<xsl:value-of select="."/>
-				</xsl:when>
+				
 				<!-- ws 1.7  -->
 				<xsl:when test="@type">
-					<xsl:choose>
-						<xsl:when test="@type">
-							<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
+					<xsl:choose>		
+						<xsl:when test="contains ('school cbu-school', $type)">
+							<dc:subject>
+								<xsl:value-of select="."/>
+							</dc:subject>
 						</xsl:when>
-						<xsl:when test="contains ('isbn issn uri doi lccn uri', $type)">
-							<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
+						<xsl:when test="contains ('department cbu-department', $type)">
+							<dc:subject.discipline>
+								<xsl:value-of select="."/>
+							</dc:subject.discipline>
+						</xsl:when>											
+						<xsl:when test="contains ('doi', $type)">
+							<dc:identifier.doi>
+								<xsl:value-of select="."/>
+							</dc:identifier.doi>
 						</xsl:when>
+						<xsl:when test="contains ('isbn', $type)">
+							<dc:identifier.isbn>
+								<xsl:value-of select="."/>
+							</dc:identifier.isbn>
+						</xsl:when>
+						<xsl:when test="contains ('uri', $type)">
+							<dc:identifier.uri>
+								<xsl:value-of select="."/>
+							</dc:identifier.uri>
+						</xsl:when>
+						<xsl:when test="contains ('lccn', $type)">
+							<dc:identifier.lccn>
+								<xsl:value-of select="."/>
+							</dc:identifier.lccn>
+						</xsl:when>
+						<xsl:otherwise>
+							<dc:identifier>
+								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
+							</dc:identifier>	
+						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="."/>
+					<dc:identifier.other>
+						<xsl:value-of select="."/>
+					</dc:identifier.other>
 				</xsl:otherwise>
 			</xsl:choose>
-		</dc:identifier>
+		</xsl:if>
 	</xsl:template>
-
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
-			<dc:identifier>
-				<xsl:value-of select="."/>
-			</dc:identifier>
+			<xsl:if test="text()">
+				<dc:identifier.uri>
+					<xsl:value-of select="."/>
+				</dc:identifier.uri>
+			</xsl:if>
 		</xsl:for-each>
+		<xsl:for-each select="mods:physicalLocation">
+			<xsl:if test="text()">
+				<dc:relation>
+					<xsl:value-of select="."/>
+				</dc:relation>
+			</xsl:if>
+		</xsl:for-each>		
 	</xsl:template>
 
 	<xsl:template match="mods:language">
-		<dc:language>
-			<xsl:value-of select="child::*"/>
-		</dc:language>
+		<xsl:for-each select="mods:languageTerm">
+			<xsl:if test="text()">
+				<xsl:choose>
+					<xsl:when test="@type='code'">
+						<dc:language>
+							<xsl:value-of select="."/>
+						</dc:language>
+						<dc:language.iso>
+							<xsl:value-of select="@authority"/>
+						</dc:language.iso>			
+					</xsl:when>
+					<xsl:otherwise>
+						<dc:language>
+							<xsl:value-of select="."/>
+						</dc:language>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:if>
+		</xsl:for-each>
+		
+		
 	</xsl:template>
 
 	<xsl:template match="mods:relatedItem[mods:titleInfo | mods:name | mods:identifier | mods:location]">
@@ -382,9 +554,27 @@
 
 
 	<xsl:template match="mods:accessCondition">
-		<dc:rights>
-			<xsl:value-of select="."/>
-		</dc:rights>
+		<xsl:variable name="contact_author" select="."></xsl:variable>
+		<xsl:choose>
+			<xsl:when test="(@displayLabel='License') and ($contact_author='Contact Author')">
+				<dc:rights.holder>Author</dc:rights.holder>
+			</xsl:when>
+			<xsl:when test="(@displayLabel='Permission Statement')">
+				<dc:rights>
+					<xsl:value-of select="."/>
+				</dc:rights>
+			</xsl:when>
+			<xsl:when test="(@type='restriction on access')">
+				<dc:rights>
+					<xsl:value-of select="."/>
+				</dc:rights>
+			</xsl:when>			
+			<xsl:otherwise>
+				<dc:rights>
+					<xsl:value-of select="."/>
+				</dc:rights>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template name="name">
@@ -408,10 +598,16 @@
 				<xsl:value-of select="mods:displayForm"/>
 				<xsl:text>) </xsl:text>
 			</xsl:if>
-			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']!='creator']">
-				<xsl:text> (</xsl:text>
-				<xsl:value-of select="normalize-space(child::*)"/>
-				<xsl:text>) </xsl:text>
+			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']]">
+				<xsl:if test="
+					not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'author')) 
+					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contributor')) 
+					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'creator'))
+					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'editor'))">
+					<xsl:text> (</xsl:text>
+					<xsl:value-of select="normalize-space(child::*)"/>
+					<xsl:text>) </xsl:text>
+				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:value-of select="normalize-space($name)"/>
