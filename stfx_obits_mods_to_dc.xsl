@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3" exclude-result-prefixes="mods" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:srw_dc="info:srw/schema/1/dc-schema" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3" exclude-result-prefixes="mods" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:srw_dc="info:srw/schema/1/dc-schema" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:oaire="http://namespace.openaire.eu/schema/oaire/">
 
 	<!-- 
     Version 1.8		2015-03-05 tmee@loc.gov
@@ -59,6 +59,7 @@
 	<xsl:output method="xml" indent="yes"/>
 
 	<xsl:template match="/">
+		
 		<xsl:choose>
 			<!-- WS: updated schema location -->
 			<xsl:when test="//mods:modsCollection">
@@ -75,12 +76,81 @@
 				<xsl:for-each select="mods:mods">
 					<oai_dc:dc xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
 						<xsl:apply-templates/>
+						<xsl:call-template name="obituaries"/>
 					</oai_dc:dc>
 				</xsl:for-each>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 	
+	<xsl:template name='obituaries'>
+		<oaire:citation.title>The Casket</oaire:citation.title>
+		
+		<xsl:for-each select="mods:casket_year">
+			<dc:date.issued><xsl:value-of select="."/></dc:date.issued>	
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:casket_vol">
+			<oaire:citation.volume><xsl:value-of select="."/></oaire:citation.volume>	
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:casket_issue">
+			<oaire:citation.issue><xsl:value-of select="."/></oaire:citation.issue>	
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:casket_page">
+			<oaire:citation.startPage><xsl:value-of select="."/></oaire:citation.startPage>
+			<oaire:citation.endPage><xsl:value-of select="."/></oaire:citation.endPage>
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:birth_place">
+			<dc:subject.birth_location><xsl:value-of select="."/></dc:subject.birth_location>	
+		</xsl:for-each>
+
+		<xsl:for-each select="mods:birth">
+			<dc:date.birth><xsl:value-of select="."/></dc:date.birth>	
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:death_place">
+			<dc:subject.death_location><xsl:value-of select="."/></dc:subject.death_location>	
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:death">
+			<dc:date.death><xsl:value-of select="."/></dc:date.death>	
+		</xsl:for-each>		
+		
+		<xsl:for-each select="mods:age">
+			<dc:subject.age><xsl:value-of select="."/></dc:subject.age>	
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:father">
+			<dc:subject.father><xsl:value-of select="."/></dc:subject.father>
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:father_town">
+			<dc:subject.father_town><xsl:value-of select="."/></dc:subject.father_town>
+		</xsl:for-each>
+
+		<xsl:for-each select="mods:spouse">
+			<dc:subject.spouse><xsl:value-of select="."/></dc:subject.spouse>	
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:spouse_death">
+			<dc:subject.spouse_death><xsl:value-of select="."/></dc:subject.spouse_death>	
+		</xsl:for-each>		
+
+		<xsl:for-each select="mods:other_relations">
+			<dc:subject.other_relations><xsl:value-of select="."/></dc:subject.other_relations>	
+		</xsl:for-each>		
+
+		<xsl:for-each select="mods:notes">
+			<dc:description.note><xsl:value-of select="."/></dc:description.note>	
+		</xsl:for-each>	
+	</xsl:template>
+	
+	
+
+
 	<xsl:template match="mods:titleInfo">
 		<xsl:if test="mods:title/text()">
 			<xsl:choose>
