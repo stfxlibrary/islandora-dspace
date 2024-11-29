@@ -130,15 +130,27 @@
 		<xsl:for-each select="mods:father_town">
 			<dc:subject.father_town><xsl:value-of select="."/></dc:subject.father_town>
 		</xsl:for-each>
+		
+		<xsl:for-each select="mods:mother">
+			<dc:subject.mother><xsl:value-of select="."/></dc:subject.mother>
+		</xsl:for-each>
+		
+		<xsl:for-each select="mods:mother_town">
+			<dc:subject.mother_town><xsl:value-of select="."/></dc:subject.mother_town>
+		</xsl:for-each>		
 
 		<xsl:for-each select="mods:spouse">
 			<dc:subject.spouse><xsl:value-of select="."/></dc:subject.spouse>	
 		</xsl:for-each>
 		
 		<xsl:for-each select="mods:spouse_death">
-			<dc:subject.spouse_death><xsl:value-of select="."/></dc:subject.spouse_death>	
+			<dc:date.spouse_death><xsl:value-of select="."/></dc:date.spouse_death>	
 		</xsl:for-each>		
-
+		
+		<xsl:for-each select="mods:siblings">
+			<dc:subject.siblings><xsl:value-of select="."/></dc:subject.siblings>	
+		</xsl:for-each>
+		
 		<xsl:for-each select="mods:other_relations">
 			<dc:subject.other_relations><xsl:value-of select="."/></dc:subject.other_relations>	
 		</xsl:for-each>		
@@ -146,10 +158,11 @@
 		<xsl:for-each select="mods:notes">
 			<dc:description.note><xsl:value-of select="."/></dc:description.note>	
 		</xsl:for-each>	
+		
+		<xsl:for-each select="mods:affiliation">
+			<dc:subject.affiliation><xsl:value-of select="."/></dc:subject.affiliation>	
+		</xsl:for-each>		
 	</xsl:template>
-	
-	
-
 
 	<xsl:template match="mods:titleInfo">
 		<xsl:if test="mods:title/text()">
