@@ -1,0 +1,18 @@
+{
+  "menu.section.browse_global": "Browse Mount Allison University Repository",
+  "repository.title.prefix": "Mount Allison University Repository :: ",
+  "repository.title": "Mount Allison University Repository :: ",
+  "title": "Mount Allison University Repository",
+  "home.top-level-communities.head": "Communities in Mount Allison University Repository",
+  "info.feedback.info": "Thanks for sharing your feedback about the DSpace system. Your comments are appreciated!",
+  "login.form.header": "Please log in to Mount Allison University Repository",
+  "logout.form.header": "Log out from Mount Allison University Repository",
+  "mydspace.breadcrumbs": "MyMount Allison",
+  "mydspace.title": "MyMount Allison University Repository",
+  "nav.browse.header": "All of Mount Allison University Repository",
+  "nav.mydspace": "MyMount Allison",
+  "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to Mount Allison University Repository.",
+  "search.form.scope.all": "All of Mount Allison University Repository",
+  "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to Mount Allison University Repository.",
+  "submission.import-external.back-to-my-dspace": "Back to MyMount Allison"
+}

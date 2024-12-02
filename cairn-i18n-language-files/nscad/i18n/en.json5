@@ -1,0 +1,18 @@
+{
+  "menu.section.browse_global": "Browse NSCAD Repository",
+  "repository.title.prefix": "NSCAD Repository :: ",
+  "repository.title": "NSCAD Repository :: ",
+  "title": "NSCAD Repository",
+  "home.top-level-communities.head": "Communities in NSCAD Repository",
+  "info.feedback.info": "Thanks for sharing your feedback about the NSCAD Repository system. Your comments are appreciated!",
+  "login.form.header": "Please log in to NSCAD Repository",
+  "logout.form.header": "Log out from NSCAD Repository",
+  "mydspace.breadcrumbs": "MyNSCAD Repository",
+  "mydspace.title": "MyNSCAD Repository",
+  "nav.browse.header": "All of NSCAD Repository",
+  "nav.mydspace": "MyNSCAD Repository",
+  "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to NSCAD Repository.",
+  "search.form.scope.all": "All of NSCAD Repository",
+  "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to NSCAD Repository.",
+  "submission.import-external.back-to-my-dspace": "Back to MyNSCAD Repository"
+}

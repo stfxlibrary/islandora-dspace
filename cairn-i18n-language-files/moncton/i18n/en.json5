@@ -1,0 +1,19 @@
+{
+  "menu.section.browse_global": "Browse ScriptoriUM",
+  "repository.title.prefix": "ScriptoriUM :: ",
+  "repository.title": "ScriptoriUM :: ",
+  "title": "ScriptoriUM",
+  "home.top-level-communities.head": "Communities in ScriptoriUM",
+  "info.feedback.info": "Thanks for sharing your feedback about the DSpace system. Your comments are appreciated!",
+  "login.form.header": "Please log in to ScriptoriUM",
+  "logout.form.header": "Log out from ScriptoriUM",
+  "mydspace.breadcrumbs": "MyScriptoriUM",
+  "mydspace.title": "MyScriptoriUM",
+  "nav.browse.header": "All of ScriptoriUM",
+  "nav.mydspace": "MyScriptoriUM",
+  "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to ScriptoriUM.",
+  "search.form.scope.all": "All of ScriptoriUM",
+  "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to ScriptoriUM.",
+  "submission.import-external.back-to-my-dspace": "Back to MyScriptoriUM",
+  "moncton.home.page.text": "ScriptoriUM is the institutional repository for scholarly publications by the students, researchers, and Faculty of the Université de Moncton. For more information, please visit <a href=\"https://www.umoncton.ca/bibliotheques/ScriptoriUM\" target=\"_blank\">our website.</a>"
+}

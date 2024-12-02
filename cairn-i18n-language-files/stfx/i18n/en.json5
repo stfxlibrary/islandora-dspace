@@ -1,0 +1,18 @@
+{
+  "menu.section.browse_global": "Browse StFX Scholar",
+  "repository.title.prefix": "StFX Scholar :: ",
+  "repository.title": "StFX Scholar :: ",
+  "title": "StFX Scholar",
+  "home.top-level-communities.head": "Communities in StFX Scholar",
+  "info.feedback.info": "Thanks for sharing your feedback about the DSpace system. Your comments are appreciated!",
+  "login.form.header": "Please log in to StFX Scholar",
+  "logout.form.header": "Log out from StFX Scholar",
+  "mydspace.breadcrumbs": "MyStFX Scholar",
+  "mydspace.title": "MyStFX Scholar",
+  "nav.browse.header": "All of StFX Scholar",
+  "nav.mydspace": "MyStFX Scholar",
+  "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to StFX Scholar.",
+  "search.form.scope.all": "All of StFX Scholar",
+  "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to StFX Scholar.",
+  "submission.import-external.back-to-my-dspace": "Back to MyStFX Scholar"
+}

@@ -1,0 +1,18 @@
+{
+  "menu.section.browse_global": "Browse CBU Scholar",
+  "repository.title.prefix": "CBU Scholar :: ",
+  "repository.title": "CBU Scholar :: ",
+  "title": "CBU Scholar",
+  "home.top-level-communities.head": "Communities in CBU Scholar",
+  "info.feedback.info": "Thanks for sharing your feedback about the DSpace system. Your comments are appreciated!",
+  "login.form.header": "Please log in to CBU Scholar",
+  "logout.form.header": "Log out from CBU Scholar",
+  "mydspace.breadcrumbs": "MyCBU Scholar",
+  "mydspace.title": "MyCBU Scholar",
+  "nav.browse.header": "All of CBU Scholar",
+  "nav.mydspace": "MyCBU Scholar",
+  "register-page.registration.info": "Register an account to subscribe to collections for email updates, and submit new items to CBU Scholar.",
+  "search.form.scope.all": "All of CBU Scholar",
+  "submission.import-external.page.hint": "Enter a query above to find items from the web to import in to CBU Scholar.",
+  "submission.import-external.back-to-my-dspace": "Back to MyCBU Scholar"
+}
