@@ -88,7 +88,8 @@
 					<dc:title.alternative>
 						<xsl:value-of select="*"/>
 					</dc:title.alternative>
-				</xsl:when>				
+				</xsl:when>
+				<xsl:when test="parent::node()[@type='host']"/>				
 				<xsl:otherwise>
 					<dc:title>
 						<xsl:value-of select="mods:nonSort"/>
