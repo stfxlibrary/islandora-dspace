@@ -580,11 +580,6 @@
 						</oaire:citation.title>
 					</xsl:if>
 				</xsl:for-each>
-								
-				<xsl:for-each select="mods:identifier">
-					<xsl:call-template name="mods-identifier"/>
-				</xsl:for-each>
-			
 				
 				<xsl:call-template name="originInfo" />
 
