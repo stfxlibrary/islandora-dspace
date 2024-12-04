@@ -119,7 +119,7 @@
 	<xsl:template match="mods:name" name="mods-name">
 		<xsl:choose>
 			<!-- StFX: Change mods:roletype author to dc.contributor.author -->
-			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='author'">
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='auteur'">
 				<dc:contributor.author>
 					<xsl:call-template name="name"/>
 				</dc:contributor.author>
@@ -475,12 +475,12 @@
 				<!-- ws 1.7  -->
 				<xsl:when test="@type">
 					<xsl:choose>		
-						<xsl:when test="contains ('school cbu-school', $type)">
+						<xsl:when test="contains ('school campus', $type)">
 							<dc:subject>
 								<xsl:value-of select="."/>
 							</dc:subject>
 						</xsl:when>
-						<xsl:when test="contains ('department cbu-department', $type)">
+						<xsl:when test="contains ('department faculté', $type)">
 							<dc:subject.discipline>
 								<xsl:value-of select="."/>
 							</dc:subject.discipline>
@@ -502,7 +502,7 @@
 						</xsl:when>						
 						<xsl:when test="contains ('uri', $type)">
 							<dc:identifier.uri>
-								<xsl:value-of select="."/>
+								<xsl:value-of select="translate(normalize-space(.),' ','')"/>
 							</dc:identifier.uri>
 						</xsl:when>
 						<xsl:when test="contains ('lccn', $type)">
@@ -660,7 +660,7 @@
 			</xsl:if>
 			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']]">
 				<xsl:if test="
-					not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'author')) 
+					not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'auteur')) 
 					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'contributor')) 
 					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'creator'))
 					and not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'editor'))">

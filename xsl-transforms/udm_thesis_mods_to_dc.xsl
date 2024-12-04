@@ -139,7 +139,7 @@
 	<xsl:template match="mods:name">
 		<xsl:choose>
 			<!-- StFX: Change mods:roletype author to dc.contributor.author -->
-			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='author'">
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='auteur'">
 				<dc:contributor.author>
 					<xsl:call-template name="name"/>
 				</dc:contributor.author>
@@ -445,12 +445,12 @@
 				<!-- ws 1.7  -->
 				<xsl:when test="@type">
 					<xsl:choose>		
-						<xsl:when test="contains ('school cbu-school', $type)">
+						<xsl:when test="contains ('school campus', $type)">
 							<dc:subject>
 								<xsl:value-of select="."/>
 							</dc:subject>
 						</xsl:when>
-						<xsl:when test="contains ('department cbu-department', $type)">
+						<xsl:when test="contains ('department faculté', $type)">
 							<dc:subject.discipline>
 								<xsl:value-of select="."/>
 							</dc:subject.discipline>
