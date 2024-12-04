@@ -479,15 +479,20 @@
 				<xsl:when test="@type">
 					<xsl:choose>		
 						<xsl:when test="contains ('school campus', $type)">
-							<dc:subject>
+							<dc:subject.campus>
 								<xsl:value-of select="."/>
-							</dc:subject>
+							</dc:subject.campus>
 						</xsl:when>
-						<xsl:when test="contains ('department faculté', $type)">
-							<dc:subject.discipline>
+						<xsl:when test="contains ('department', $type)">
+							<dc:subject.department>
 								<xsl:value-of select="."/>
-							</dc:subject.discipline>
-						</xsl:when>											
+							</dc:subject.department>
+						</xsl:when>
+						<xsl:when test="contains ('faculty faculté', $type)">
+							<dc:subject.faculty>
+								<xsl:value-of select="."/>
+							</dc:subject.faculty>
+						</xsl:when>	
 						<xsl:when test="contains ('doi', $type)">
 							<dc:identifier.doi>
 								<xsl:value-of select="."/>

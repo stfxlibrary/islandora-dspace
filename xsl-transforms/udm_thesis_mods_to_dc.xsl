@@ -86,8 +86,8 @@
 
 		<xsl:variable name="discipline" select="./etd:degree/etd:discipline"/>
 		<xsl:choose>
-			<xsl:when test="contains($discipline,'.') = true()">
-				<dc:subject.discipline><xsl:value-of select="substring-before(substring-after(./etd:degree/etd:discipline, '. '),'.')"/></dc:subject.discipline>
+			<xsl:when test="contains($discipline,',') = true()">
+				<dc:subject.discipline><xsl:value-of select="substring-before(substring-after(./etd:degree/etd:discipline, ', '),',')"/></dc:subject.discipline>
 				<thesis:degree>
 					<thesis:degree.name><xsl:value-of select="./etd:degree/etd:name"/></thesis:degree.name>
 					<thesis:degree.level><xsl:value-of select="./etd:degree/etd:level"/></thesis:degree.level>
@@ -457,14 +457,19 @@
 				<xsl:when test="@type">
 					<xsl:choose>		
 						<xsl:when test="contains ('school campus', $type)">
-							<dc:subject>
+							<dc:subject.campus>
 								<xsl:value-of select="."/>
-							</dc:subject>
+							</dc:subject.campus>
 						</xsl:when>
-						<xsl:when test="contains ('department faculté', $type)">
-							<dc:subject.discipline>
+						<xsl:when test="contains ('department', $type)">
+							<dc:subject.department>
 								<xsl:value-of select="."/>
-							</dc:subject.discipline>
+							</dc:subject.department>
+						</xsl:when>
+						<xsl:when test="contains ('faculty faculté', $type)">
+							<dc:subject.faculty>
+								<xsl:value-of select="."/>
+							</dc:subject.faculty>
 						</xsl:when>											
 						<xsl:when test="contains ('doi', $type)">
 							<dc:identifier.doi>
