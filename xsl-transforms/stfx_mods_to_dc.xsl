@@ -237,7 +237,7 @@
 						<xsl:value-of select="."/>
 					</dc:relation>				
 				</xsl:when>
-				<xsl:otherwise>
+
 					<xsl:otherwise>
 						<dc:description.note>
 							<xsl:if test="@type"><xsl:value-of select="@type"/>: </xsl:if>
