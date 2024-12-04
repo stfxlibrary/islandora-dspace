@@ -92,11 +92,8 @@
 					<thesis:degree.name><xsl:value-of select="./etd:degree/etd:name"/></thesis:degree.name>
 					<thesis:degree.level><xsl:value-of select="./etd:degree/etd:level"/></thesis:degree.level>
 					<thesis:degree.grantor><xsl:value-of select="./etd:degree/etd:grantor"/></thesis:degree.grantor>
-					<thesis:degree.faculty>
-						<xsl:value-of select="substring-before(./etd:degree/etd:discipline, '.')"/>
-					</thesis:degree.faculty>
 					<thesis:degree.discipline>
-						<xsl:value-of select="substring-before(substring-after(./etd:degree/etd:discipline, '. '),'.')"/>
+						<xsl:value-of select="substring-after(./etd:degree/etd:discipline, ', ')"/>
 					</thesis:degree.discipline>
 				</thesis:degree>
 			</xsl:when>
@@ -491,6 +488,7 @@
 								<xsl:value-of select="."/>
 							</dc:identifier.lccn>
 						</xsl:when>
+						<xsl:when test="contains ('lac', $type)"/>			
 						<xsl:otherwise>
 							<dc:identifier>
 								<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
