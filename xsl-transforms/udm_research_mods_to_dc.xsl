@@ -170,10 +170,12 @@
 			</xsl:when>			
 			<xsl:otherwise>
 				<!-- ws  1.7 -->
+				<xsl:if test="child::mods:namePart/text()">
 				<dc:contributor>
 					<xsl:call-template name="name"/>
 						<xsl:if test="mods:etal">et al.</xsl:if>
 				</dc:contributor>
+				</xsl:if>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -216,9 +218,9 @@
 		</xsl:for-each>
 		<xsl:for-each select="mods:geographic">
 			<xsl:if test="text()">
-				<dc:coverage>
+				<dc:coverage.spatial>
 					<xsl:value-of select="."/>
-				</dc:coverage>
+				</dc:coverage.spatial>
 			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:hierarchicalGeographic">

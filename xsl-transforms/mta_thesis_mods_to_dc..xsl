@@ -195,9 +195,9 @@
 		</xsl:for-each>
 		<xsl:for-each select="mods:geographic">
 			<xsl:if test="text()">
-				<dc:coverage>
+				<dc:coverage.spatial>
 					<xsl:value-of select="."/>
-				</dc:coverage>
+				</dc:coverage.spatial>
 			</xsl:if>
 		</xsl:for-each>
 		<xsl:for-each select="mods:hierarchicalGeographic">
