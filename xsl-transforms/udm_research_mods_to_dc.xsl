@@ -120,9 +120,11 @@
 		<xsl:choose>
 			<!-- StFX: Change mods:roletype author to dc.contributor.author -->
 			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='auteur'">
-				<dc:contributor.author>
-					<xsl:call-template name="name"/>
-				</dc:contributor.author>
+				<xsl:if test="child::mods:namePart/text()">
+					<dc:contributor.author>
+						<xsl:call-template name="name"/>
+					</dc:contributor.author>
+				</xsl:if>
 			</xsl:when>
 
 			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='creator' or mods:role/mods:roleTerm[@type='code']='cre'">
