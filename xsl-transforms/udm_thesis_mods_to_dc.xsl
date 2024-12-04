@@ -144,7 +144,7 @@
 					<xsl:call-template name="name"/>
 				</dc:contributor.author>
 			</xsl:when>
-			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='thesis advisor'">
+			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='directeur de thèse'">
 				<dc:contributor.advisor>
 					<xsl:call-template name="name"/>
 				</dc:contributor.advisor>
@@ -239,8 +239,14 @@
 						<xsl:value-of select="."/>
 					</dc:relation>				
 				</xsl:when>
+				<xsl:when test="@type='proquest'">
+					<dc:relation.uri>
+						<xsl:value-of select="."/>
+					</dc:relation.uri>
+				</xsl:when>
 				<xsl:otherwise>
 					<dc:description>
+						<xsl:if test="@type"><xsl:value-of select="@type"/>: </xsl:if>
 						<xsl:value-of select="."/>
 					</dc:description>
 				</xsl:otherwise>
