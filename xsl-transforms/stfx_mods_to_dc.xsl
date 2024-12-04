@@ -232,10 +232,12 @@
 					</dc:relation>				
 				</xsl:when>
 				<xsl:otherwise>
-					<dc:description>
-						<xsl:value-of select="."/>
-					</dc:description>
-				</xsl:otherwise>
+					<xsl:otherwise>
+						<dc:description.note>
+							<xsl:if test="@type"><xsl:value-of select="@type"/>: </xsl:if>
+							<xsl:value-of select="."/>
+						</dc:description.note>
+					</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
