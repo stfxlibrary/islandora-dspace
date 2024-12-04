@@ -245,10 +245,10 @@
 					</dc:relation.uri>
 				</xsl:when>
 				<xsl:otherwise>
-					<dc:description>
+					<dc:description.note>
 						<xsl:if test="@type"><xsl:value-of select="@type"/>: </xsl:if>
 						<xsl:value-of select="."/>
-					</dc:description>
+					</dc:description.note>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
