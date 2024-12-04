@@ -59,6 +59,7 @@
 	<xsl:output method="xml" indent="yes"/>
 
 	<xsl:template match="/">
+		
 		<xsl:choose>
 			<!-- WS: updated schema location -->
 			<xsl:when test="//mods:modsCollection">
@@ -66,6 +67,20 @@
 					<xsl:apply-templates/>
 					<xsl:for-each select="mods:modsCollection/mods:mods">
 						<srw_dc:dc xsi:schemaLocation="info:srw/schema/1/dc-schema http://www.loc.gov/standards/sru/recordSchemas/dc-schema.xsd">
+							<dc:date.issued>
+								<xsl:choose>
+									<xsl:when test="mods:originInfo/mods:dateIssued[@point='start']">
+										<xsl:value-of select="mods:originInfo/mods:dateIssued"/>
+										<xsl:text> - </xsl:text>
+									</xsl:when>
+									<xsl:when test="mods:originInfo/mods:dateIssued[@point='end']">
+										<xsl:value-of select="mods:originInfo/mods:dateIssued"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="mods:originInfo/mods:dateIssued"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</dc:date.issued>
 							<xsl:apply-templates/>
 						</srw_dc:dc>
 					</xsl:for-each>
@@ -74,11 +89,27 @@
 			<xsl:otherwise>
 				<xsl:for-each select="mods:mods">
 					<oai_dc:dc xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+						<dc:date.issued>
+							<xsl:choose>
+								<xsl:when test="mods:originInfo/mods:dateIssued[@point='start']">
+									<xsl:value-of select="mods:originInfo/mods:dateIssued"/>
+									<xsl:text> - </xsl:text>
+								</xsl:when>
+								<xsl:when test="mods:originInfo/mods:dateIssued[@point='end']">
+									<xsl:value-of select="mods:originInfo/mods:dateIssued"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="mods:originInfo/mods:dateIssued"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</dc:date.issued>
 						<xsl:apply-templates/>
 					</oai_dc:dc>
 				</xsl:for-each>
 			</xsl:otherwise>
 		</xsl:choose>
+		
+		
 	</xsl:template>
 	
 	<xsl:template match="mods:titleInfo">
@@ -277,12 +308,12 @@
 			</oaire:citation.issue>		
 		</xsl:for-each>
 		
-		<xsl:for-each select="mods:date">
+<!--		<xsl:for-each select="mods:date">
 			<dc:date.issued>
 				<xsl:value-of select="."/>
 			</dc:date.issued>		
-		</xsl:for-each>				
-	</xsl:template>	
+		</xsl:for-each>			-->	
+	</xsl:template>
 	
 
 	<xsl:template match="mods:abstract">
@@ -325,24 +356,7 @@
 		</dc:date>
 	</xsl:template>
 	
-	<xsl:template match="mods:dateIssued">
-		<xsl:if test="text()">
-			<dc:date.issued>
-				<xsl:choose>
-					<xsl:when test="@point='start'">
-						<xsl:value-of select="."/>
-						<xsl:text> - </xsl:text>
-					</xsl:when>
-					<xsl:when test="@point='end'">
-						<xsl:value-of select="."/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="."/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</dc:date.issued>
-		</xsl:if>
-	</xsl:template>
+
 	
 	
 	<xsl:template match="mods:dateIssued[@point='start']">
