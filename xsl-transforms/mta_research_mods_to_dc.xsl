@@ -232,9 +232,10 @@
 					</dc:relation>				
 				</xsl:when>
 				<xsl:otherwise>
-					<dc:description>
+					<dc:description.note>
+						<xsl:if test="@type"><xsl:value-of select="@type"/>: </xsl:if>
 						<xsl:value-of select="."/>
-					</dc:description>
+					</dc:description.note>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:if>
@@ -528,7 +529,7 @@
 
 	<xsl:template match="mods:location">
 		<xsl:for-each select="mods:url">
-			<xsl:if test="text()">
+			<xsl:if test="text() and not(contains(text(),'cairnrepo'))">
 				<dc:identifier.uri>
 					<xsl:value-of select="."/>
 				</dc:identifier.uri>
@@ -653,11 +654,11 @@
 				<xsl:value-of select="mods:namePart[@type='date']"/>
 				<xsl:text/>
 			</xsl:if>
-			<xsl:if test="mods:displayForm">
+<!--			<xsl:if test="mods:displayForm">
 				<xsl:text> (</xsl:text>
 				<xsl:value-of select="mods:displayForm"/>
 				<xsl:text>) </xsl:text>
-			</xsl:if>
+			</xsl:if>-->
 			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']]">
 				<xsl:if test="
 					not(contains(translate(self::*,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'author')) 
