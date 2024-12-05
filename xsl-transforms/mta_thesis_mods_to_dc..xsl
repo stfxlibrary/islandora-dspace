@@ -147,11 +147,18 @@
 				</xsl:if>
 			</xsl:when>
 			<xsl:when test="translate(mods:role/mods:roleTerm[@type='text'],'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='thesis advisor'">
-				<xsl:if test="child::mods:namePart/text()">
-					<dc:contributor.advisor>
-						<xsl:call-template name="name"/>
-					</dc:contributor.advisor>
-				</xsl:if>
+				<xsl:choose>
+					<xsl:when test="child::mods:namePart/text()">
+						<dc:contributor.advisor>
+							<xsl:call-template name="name"/>
+						</dc:contributor.advisor>
+					</xsl:when>
+					<xsl:otherwise>
+						<dc:contributor.advisor>
+							<xsl:value-of select="mods:displayForm"/>
+						</dc:contributor.advisor>
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:when>			
 		</xsl:choose>
 	</xsl:template>
@@ -260,9 +267,11 @@
 	</xsl:template>	
 	
 	<xsl:template match="mods:abstract">
-		<dc:description.abstract>
-			<xsl:value-of select="."/>
-		</dc:description.abstract>
+		<xsl:if test="text()">
+			<dc:description.abstract>
+				<xsl:value-of select="."/>
+			</dc:description.abstract>
+		</xsl:if>
 	</xsl:template>	
 
 	<xsl:template match="mods:originInfo">
@@ -620,10 +629,12 @@
 				<xsl:value-of select="mods:displayForm"/>
 				<xsl:text>) </xsl:text>
 			</xsl:if>
-			<xsl:for-each select="mods:role[mods:roleTerm[@type='text']!='creator']">
-				<xsl:text> (</xsl:text>
-				<xsl:value-of select="normalize-space(child::*)"/>
-				<xsl:text>) </xsl:text>
+			<xsl:for-each select="mods:role[mods:roleTerm[@type]]">
+				<xsl:if test="not(contains('author creator advisor',@type))">
+					<xsl:text> (</xsl:text>
+					<xsl:value-of select="normalize-space(child::*)"/>
+					<xsl:text>) </xsl:text>
+				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:value-of select="normalize-space($name)"/>
