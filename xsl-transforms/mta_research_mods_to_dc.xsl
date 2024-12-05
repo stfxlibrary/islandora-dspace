@@ -143,10 +143,11 @@
 			</xsl:when>			
 			<xsl:otherwise>
 				<!-- ws  1.7 -->
+				<xsl:if test="text()">
 				<dc:contributor>
 					<xsl:call-template name="name"/>
 						<xsl:if test="mods:etal">et al.</xsl:if>
-				</dc:contributor>
+				</dc:contributor></xsl:if>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -281,7 +282,7 @@
 			</oaire:citation.issue>		
 		</xsl:for-each>
 		
-		<xsl:for-each select="mods:date">
+		<xsl:for-each select="mods:originInfo/mods:date">
 			<dc:date.issued>
 				<xsl:value-of select="."/>
 			</dc:date.issued>		
@@ -637,9 +638,11 @@
 				</dc:rights>
 			</xsl:when>			
 			<xsl:otherwise>
-				<dc:rights>
-					<xsl:value-of select="."/>
-				</dc:rights>
+				<xsl:if test="text()">
+					<dc:rights>
+						<xsl:value-of select="."/>
+					</dc:rights>
+				</xsl:if>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
