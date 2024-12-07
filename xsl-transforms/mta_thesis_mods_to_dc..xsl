@@ -91,7 +91,7 @@
 				<thesis:degree>
 					<thesis:degree.name><xsl:value-of select="./etd:degree/etd:name"/></thesis:degree.name>
 					<thesis:degree.level><xsl:value-of select="./etd:degree/etd:level"/></thesis:degree.level>
-					<thesis:degree.grantor><xsl:value-of select="./etd:degree/etd:grantor"/></thesis:degree.grantor>
+					<thesis:degree.grantor>Mount Allison University</thesis:degree.grantor>
 					<thesis:degree.faculty>
 						<xsl:value-of select="substring-before(./etd:degree/etd:discipline, '.')"/>
 					</thesis:degree.faculty>
@@ -104,7 +104,7 @@
 				<thesis:degree>
 					<thesis:degree.name><xsl:value-of select="./etd:degree/etd:name"/></thesis:degree.name>
 					<thesis:degree.level><xsl:value-of select="./etd:degree/etd:level"/></thesis:degree.level>
-					<thesis:degree.grantor><xsl:value-of select="./etd:degree/etd:grantor"/></thesis:degree.grantor>
+					<thesis:degree.grantor>Mount Allison University</thesis:degree.grantor>
 					<thesis:degree.discipline><xsl:value-of select="./etd:degree/etd:discipline"/></thesis:degree.discipline>
 				</thesis:degree>
 			</xsl:otherwise>
@@ -154,9 +154,11 @@
 						</dc:contributor.advisor>
 					</xsl:when>
 					<xsl:otherwise>
-						<dc:contributor.advisor>
-							<xsl:value-of select="mods:displayForm"/>
-						</dc:contributor.advisor>
+						<xsl:if test="text()">
+							<dc:contributor.advisor>
+								<xsl:value-of select="mods:displayForm"/>
+							</dc:contributor.advisor>
+						</xsl:if>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>			
@@ -164,9 +166,11 @@
 	</xsl:template>
 
 	<xsl:template match="mods:classification">
-		<dc:subject>
-			<xsl:value-of select="."/>
-		</dc:subject>
+		 <xsl:if test="text()">
+			<dc:subject>
+				<xsl:value-of select="."/>
+			</dc:subject>
+		 </xsl:if>
 	</xsl:template>
 
 	<!-- ws 1.7  -->
