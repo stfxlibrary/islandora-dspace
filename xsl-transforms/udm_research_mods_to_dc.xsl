@@ -432,7 +432,12 @@
 	</xsl:template>
 	
 	<xsl:template match="mods:physicalDescription">
-		<dc:type><xsl:value-of select="."/></dc:type>
+		
+		<xsl:for-each select=".">
+			<xsl:if test="not(contains('Version of Record',text()))">
+				<dc:type><xsl:value-of select="."/></dc:type>
+			</xsl:if>
+		</xsl:for-each>
 		
 		<xsl:for-each select="mods:extent">
 			<xsl:if test="text()">
