@@ -104,7 +104,7 @@
 				<thesis:degree>
 					<thesis:degree.name><xsl:value-of select="./etd:degree/etd:name"/></thesis:degree.name>
 					<thesis:degree.level><xsl:value-of select="./etd:degree/etd:level"/></thesis:degree.level>
-					<thesis:degree.grantor><xsl:value-of select="./etd:degree/etd:grantor"/></thesis:degree.grantor>
+					<thesis:degree.grantor>Nova Scotia College of Art and Design</thesis:degree.grantor>
 					<thesis:degree.discipline><xsl:value-of select="./etd:degree/etd:discipline"/></thesis:degree.discipline>
 				</thesis:degree>
 			</xsl:otherwise>
@@ -157,9 +157,11 @@
 	</xsl:template>
 
 	<xsl:template match="mods:classification">
-		<dc:subject>
-			<xsl:value-of select="."/>
-		</dc:subject>
+		<xsl:if test="text()">
+			<dc:subject>
+				<xsl:value-of select="."/>
+			</dc:subject>
+		</xsl:if>
 	</xsl:template>
 
 	<!-- ws 1.7  -->
