@@ -143,10 +143,12 @@
 			</xsl:when>			
 			<xsl:otherwise>
 				<!-- ws  1.7 -->
-				<dc:contributor>
-					<xsl:call-template name="name"/>
-					<xsl:if test="mods:etal">et al.</xsl:if>
-				</dc:contributor>
+				<xsl:if test="text()">
+					<dc:contributor>
+						<xsl:call-template name="name"/>
+						<xsl:if test="mods:etal">et al.</xsl:if>
+					</dc:contributor>
+				</xsl:if>	
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -274,7 +276,7 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template match="mods:dateCreated | mods:dateCaptured">
+	<xsl:template match="mods:dateCreated/text() | mods:dateCaptured/text()">
 		<dc:date>
 			<xsl:choose>
 				<xsl:when test="@point='start'">
