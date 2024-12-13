@@ -34,16 +34,24 @@
       [label]="'relationships.isAuthorOf' | translate">
     </ds-themed-metadata-representation-list>
     <ds-generic-item-page-field [item]="object"
-      [fields]="['journal.title']"
+      [fields]="['oaire.citation.title']"
       [label]="'item.page.journal-title'">
     </ds-generic-item-page-field>
     <ds-generic-item-page-field [item]="object"
-      [fields]="['journal.identifier.issn']"
+      [fields]="['dc.identifier.issn']"
       [label]="'item.page.journal-issn'">
     </ds-generic-item-page-field>
     <ds-generic-item-page-field [item]="object"
-      [fields]="['journalvolume.identifier.name']"
+      [fields]="['oaire.citation.volume']"
       [label]="'item.page.volume-title'">
+    </ds-generic-item-page-field>
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['oaire.citation.issue']"
+      [label]="'item.page.volume-issue'">
+    </ds-generic-item-page-field>    
+    <ds-generic-item-page-field [item]="object"
+      [fields]="['thesis.degree.name']"
+      [label]="Degree">
     </ds-generic-item-page-field>
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.publisher']"
