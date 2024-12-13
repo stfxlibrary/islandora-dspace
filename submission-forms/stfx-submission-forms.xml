@@ -2244,7 +2244,7 @@
         </value-pairs>
 
         <!-- StFX CUSTOM - Degree Level-->
-        <value-pairs value-pairs-name="degree_level" dc-term="type">
+        <value-pairs value-pairs-name="degree_level" dc-term="degree">
             <pair>
                 <displayed-value>N/A</displayed-value>
                 <stored-value></stored-value>
@@ -2264,7 +2264,7 @@
         </value-pairs>
 
         <!-- StFX CUSTOM - Degree Name-->
-        <value-pairs value-pairs-name="degree_name" dc-term="type">
+        <value-pairs value-pairs-name="degree_name" dc-term="degree">
             <pair>
                 <displayed-value>N/A</displayed-value>
                 <stored-value></stored-value>
@@ -2372,7 +2372,7 @@
         </value-pairs>
 
         <!-- StFX CUSTOM - Degree Discipline-->
-        <value-pairs value-pairs-name="degree_discipline" dc-term="type">
+        <value-pairs value-pairs-name="degree_discipline" dc-term="degree">
             <pair>
                 <displayed-value>N/A</displayed-value>
                 <stored-value></stored-value>
@@ -2532,7 +2532,7 @@
         </value-pairs>
 
         <!-- StFX CUSTOM - Degree Faculty-->
-        <value-pairs value-pairs-name="degree_faculty" dc-term="type">
+        <value-pairs value-pairs-name="degree_faculty" dc-term="degree">
             <pair>
                 <displayed-value>N/A</displayed-value>
                 <stored-value></stored-value>
