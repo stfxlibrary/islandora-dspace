@@ -2243,6 +2243,326 @@
             </pair>
         </value-pairs>
 
+        <!-- StFX CUSTOM - Degree Level-->
+        <value-pairs value-pairs-name="degree_level" dc-term="type">
+            <pair>
+                <displayed-value>N/A</displayed-value>
+                <stored-value></stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Undergraduate</displayed-value>
+                <stored-value>Undergraduate</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Master</displayed-value>
+                <stored-value>Master</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>PhD</displayed-value>
+                <stored-value>PhD</stored-value>
+            </pair>
+        </value-pairs>
+
+        <!-- StFX CUSTOM - Degree Name-->
+        <value-pairs value-pairs-name="degree_name" dc-term="type">
+            <pair>
+                <displayed-value>N/A</displayed-value>
+                <stored-value></stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Arts with Major</displayed-value>
+                <stored-value>Bachelor of Arts with Major</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Arts in Human Kinetics</displayed-value>
+                <stored-value>Bachelor of Arts in Human Kinetics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Music</displayed-value>
+                <stored-value>Bachelor of Music</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Music (Honours)</displayed-value>
+                <stored-value>Bachelor of Music (Honours)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Arts in Music (Jazz Studies)</displayed-value>
+                <stored-value>Bachelor of Arts in Music (Jazz Studies)</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Diploma in Jazz Studies</displayed-value>
+                <stored-value>Diploma in Jazz Studies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Colloquia: Health Studies, Humanities, and Social Justice</displayed-value>
+                <stored-value>Colloquia: Health Studies, Humanities, and Social Justice</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Master of Arts in Celtic Studies</displayed-value>
+                <stored-value>Master of Arts in Celtic Studies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Business Administration</displayed-value>
+                <stored-value>Bachelor of Business Administration</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Information Systems</displayed-value>
+                <stored-value>Bachelor of Information Systems</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Science with Major</displayed-value>
+                <stored-value>Bachelor of Science with Major</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Science in Human Kinetics</displayed-value>
+                <stored-value>Bachelor of Science in Human Kinetics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Science in Human Nutrition</displayed-value>
+                <stored-value>Bachelor of Science in Human Nutrition</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Science in Nursing</displayed-value>
+                <stored-value>Bachelor of Science in Nursing</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Engineering Diploma</displayed-value>
+                <stored-value>Engineering Diploma</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Master of Science in Biology</displayed-value>
+                <stored-value>Master of Science in Biology</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Master of Science in Chemistry</displayed-value>
+                <stored-value>Master of Science in Chemistry</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Master of Science in Computer Science</displayed-value>
+                <stored-value>Master of Science in Computer Science</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Master of Science in Earth Sciences</displayed-value>
+                <stored-value>Master of Science in Earth Sciences</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Education</displayed-value>
+                <stored-value>Bachelor of Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Diploma in Adult Education</displayed-value>
+                <stored-value>Diploma in Adult Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Master of Education</displayed-value>
+                <stored-value>Master of Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Master of Adult Education</displayed-value>
+                <stored-value>Master of Adult Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>PhD in Education</displayed-value>
+                <stored-value>PhD in Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Other</displayed-value>
+                <stored-value>Other</stored-value>
+            </pair>            
+        </value-pairs>
+
+        <!-- StFX CUSTOM - Degree Discipline-->
+        <value-pairs value-pairs-name="degree_discipline" dc-term="type">
+            <pair>
+                <displayed-value>N/A</displayed-value>
+                <stored-value></stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Anthropology</displayed-value>
+                <stored-value>Anthropology</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Art</displayed-value>
+                <stored-value>Art</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Catholic Studies</displayed-value>
+                <stored-value>Catholic Studies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Celtic Studies</displayed-value>
+                <stored-value>Celtic Studies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Classical Studies</displayed-value>
+                <stored-value>Classical Studies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Development Studies</displayed-value>
+                <stored-value>Development Studies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Economics</displayed-value>
+                <stored-value>Economics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>English</displayed-value>
+                <stored-value>English</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Health</displayed-value>
+                <stored-value>Health</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>History</displayed-value>
+                <stored-value>History</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Humanities Colloquium</displayed-value>
+                <stored-value>Humanities Colloquium</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Modern Languages</displayed-value>
+                <stored-value>Modern Languages</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Music</displayed-value>
+                <stored-value>Music</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Philosophy</displayed-value>
+                <stored-value>Philosophy</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Political Science</displayed-value>
+                <stored-value>Political Science</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Psychology</displayed-value>
+                <stored-value>Psychology</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Public Policy and Governance</displayed-value>
+                <stored-value>Public Policy and Governance</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Religious Studies</displayed-value>
+                <stored-value>Religious Studies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Social Justice Colloquium</displayed-value>
+                <stored-value>Social Justice Colloquium</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Sociology</displayed-value>
+                <stored-value>Sociology</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Women's and Gender Studies</displayed-value>
+                <stored-value>Women's and Gender Studies</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Education</displayed-value>
+                <stored-value>Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Adult Education</displayed-value>
+                <stored-value>Adult Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Aquatic Resources</displayed-value>
+                <stored-value>Aquatic Resources</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Biology</displayed-value>
+                <stored-value>Biology</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Chemistry</displayed-value>
+                <stored-value>Chemistry</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Climate and Environment</displayed-value>
+                <stored-value>Climate and Environment</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Computer Science</displayed-value>
+                <stored-value>Computer Science</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Earth Sciences</displayed-value>
+                <stored-value>Earth Sciences</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Engineering</displayed-value>
+                <stored-value>Engineering</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Kinetics</displayed-value>
+                <stored-value>Human Kinetics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Human Nutrition</displayed-value>
+                <stored-value>Human Nutrition</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Math and Statistics</displayed-value>
+                <stored-value>Math and Statistics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Nursing</displayed-value>
+                <stored-value>Nursing</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Physics</displayed-value>
+                <stored-value>Physics</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Business</displayed-value>
+                <stored-value>Business</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Coady Institute</displayed-value>
+                <stored-value>Coady Institute</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Other</displayed-value>
+                <stored-value>Other</stored-value>
+            </pair>    
+        </value-pairs>
+
+        <!-- StFX CUSTOM - Degree Faculty-->
+        <value-pairs value-pairs-name="degree_faculty" dc-term="type">
+            <pair>
+                <displayed-value>N/A</displayed-value>
+                <stored-value></stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Faculty of Arts</displayed-value>
+                <stored-value>Faculty of Arts</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Faculty of Arts / Faculty of Science</displayed-value>
+                <stored-value>Faculty of Arts / Faculty of Science</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Faculty of Science</displayed-value>
+                <stored-value>Faculty of Science</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Faculty of Education</displayed-value>
+                <stored-value>Faculty of Education</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>School of Business</displayed-value>
+                <stored-value>School of Business</stored-value>
+            </pair>            
+            <pair>
+                <displayed-value>Other</displayed-value>
+                <stored-value>Other</stored-value>
+            </pair>    
+        </value-pairs>              
+
     </form-value-pairs>
 
 </input-forms>
