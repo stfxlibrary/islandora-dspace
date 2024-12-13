@@ -272,8 +272,8 @@
                     <dc-qualifier>faculty</dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Degree Faculty</label>
-                    <input-type>onebox</input-type>
-                    <hint>Enter Faculty who issued the Degree.</hint>
+                    <input-type value-pairs-name="degree_faculty">dropdown</input-type>
+                    <hint>Select Faculty who issued the Degree.</hint>
                     <required></required>
                 </field>
             </row>
@@ -284,8 +284,8 @@
                     <dc-qualifier>discipline</dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Degree Discipline</label>
-                    <input-type>onebox</input-type>
-                    <hint>Enter Discipline or Department of the Degree.</hint>
+                    <input-type value-pairs-name="degree_discipline">dropdown</input-type>
+                    <hint>Select Discipline or Department of the Degree.</hint>
                     <required></required>
                 </field>
             </row>       
@@ -308,8 +308,8 @@
                     <dc-qualifier>level</dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Degree Level</label>
-                    <input-type>onebox</input-type>
-                    <hint>e.g. Master, PhD</hint>
+                    <input-type value-pairs-name="degree_level">dropdown</input-type>
+                    <hint>Select the degree level</hint>
                     <required></required>
                 </field>
             </row>          
@@ -320,8 +320,8 @@
                     <dc-qualifier>name</dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Degree Name</label>
-                    <input-type>onebox</input-type>
-                    <hint>Enter the name of the degree</hint>
+                    <input-type value-pairs-name="degree_name">dropdown</input-type>
+                    <hint>Select the name of the degree</hint>
                     <required></required>
                 </field>
             </row>              
