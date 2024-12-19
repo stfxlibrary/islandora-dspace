@@ -372,7 +372,7 @@
                     <label>Publisher</label>
                     <style>col-sm-8</style>
                     <input-type>onebox</input-type>
-                    <hint>Enter the name of the publisher of the previously issued instance of this item.</hint>
+                    <hint>Enter Cape Breton University</hint>
                     <required></required>
                 </field>
             </row>
