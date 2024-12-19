@@ -2270,13 +2270,29 @@
                 <stored-value></stored-value>
             </pair>
             <pair>
+                <displayed-value>Bachelor of Arts & Science</displayed-value>
+                <stored-value>Bachelor of Arts & Science</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Arts & Science (Honours)</displayed-value>
+                <stored-value>Bachelor of Arts & Science (Honours)</stored-value>
+            </pair>                
+            <pair>
                 <displayed-value>Bachelor of Arts with Major</displayed-value>
                 <stored-value>Bachelor of Arts with Major</stored-value>
             </pair>
             <pair>
+                <displayed-value>Bachelor of Arts (Honours)</displayed-value>
+                <stored-value>Bachelor of Arts (Honours)</stored-value>
+            </pair>            
+            <pair>
                 <displayed-value>Bachelor of Arts in Human Kinetics</displayed-value>
                 <stored-value>Bachelor of Arts in Human Kinetics</stored-value>
             </pair>
+            <pair>
+                <displayed-value>Bachelor of Arts in Human Kinetics (Honours)</displayed-value>
+                <stored-value>Bachelor of Arts in Human Kinetics (Honours)</stored-value>
+            </pair>            
             <pair>
                 <displayed-value>Bachelor of Music</displayed-value>
                 <stored-value>Bachelor of Music</stored-value>
@@ -2306,25 +2322,53 @@
                 <stored-value>Bachelor of Business Administration</stored-value>
             </pair>
             <pair>
+                <displayed-value>Bachelor of Business Administration (Honours)</displayed-value>
+                <stored-value>Bachelor of Business Administration (Honours)</stored-value>
+            </pair>            
+            <pair>
                 <displayed-value>Bachelor of Information Systems</displayed-value>
                 <stored-value>Bachelor of Information Systems</stored-value>
             </pair>
             <pair>
+                <displayed-value>Bachelor of Information Systems (Honours)</displayed-value>
+                <stored-value>Bachelor of Information Systems (Honours)</stored-value>
+            </pair>            
+            <pair>
+                <displayed-value>Bachelor of Science</displayed-value>
+                <stored-value>Bachelor of Science</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Bachelor of Science (Honours)</displayed-value>
+                <stored-value>Bachelor of Science (Honours)</stored-value>
+            </pair>            
+            <pair>
                 <displayed-value>Bachelor of Science with Major</displayed-value>
                 <stored-value>Bachelor of Science with Major</stored-value>
-            </pair>
+            </pair>            
             <pair>
                 <displayed-value>Bachelor of Science in Human Kinetics</displayed-value>
                 <stored-value>Bachelor of Science in Human Kinetics</stored-value>
             </pair>
             <pair>
+                <displayed-value>Bachelor of Science in Human Kinetics (Honours)</displayed-value>
+                <stored-value>Bachelor of Science in Human Kinetics</stored-value>
+            </pair>            
+            <pair>
+                <displayed-value>Bachelor of Science in Human Nutrition (Honours)</displayed-value>
+                <stored-value>Bachelor of Science in Human Nutrition</stored-value>
+            </pair>
+            <pair>
                 <displayed-value>Bachelor of Science in Human Nutrition</displayed-value>
                 <stored-value>Bachelor of Science in Human Nutrition</stored-value>
+            </pair>            
+            <pair>
+                <displayed-value>Bachelor of Science in Nursing (Honours)</displayed-value>
+                <stored-value>Bachelor of Science in Nursing</stored-value>
             </pair>
             <pair>
                 <displayed-value>Bachelor of Science in Nursing</displayed-value>
                 <stored-value>Bachelor of Science in Nursing</stored-value>
-            </pair>
+            </pair>            
             <pair>
                 <displayed-value>Engineering Diploma</displayed-value>
                 <stored-value>Engineering Diploma</stored-value>
@@ -2410,10 +2454,6 @@
                 <stored-value>English</stored-value>
             </pair>
             <pair>
-                <displayed-value>Health</displayed-value>
-                <stored-value>Health</stored-value>
-            </pair>
-            <pair>
                 <displayed-value>History</displayed-value>
                 <stored-value>History</stored-value>
             </pair>
@@ -2421,6 +2461,10 @@
                 <displayed-value>Humanities Colloquium</displayed-value>
                 <stored-value>Humanities Colloquium</stored-value>
             </pair>
+            <pair>
+                <displayed-value>Interdisciplinary Health</displayed-value>
+                <stored-value>Interdisciplinary Health</stored-value>
+            </pair>            
             <pair>
                 <displayed-value>Modern Languages</displayed-value>
                 <stored-value>Modern Languages</stored-value>
