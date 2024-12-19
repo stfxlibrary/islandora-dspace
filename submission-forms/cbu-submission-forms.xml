@@ -1740,54 +1740,62 @@
             </pair>
         </value-pairs>
 
-        <!-- default language order: (from dspace 1.2.1)
+         <!-- default language order: (from dspace 1.2.1)
              "en_US", "en", "es", "de", "fr", "it", "ja", "zh", "other", ""
           -->
         <value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
             <pair>
                 <displayed-value>N/A</displayed-value>
                 <stored-value></stored-value>
-            </pair>
-            <!--
+            </pair><!--
             <pair>
                 <displayed-value>English (United States)</displayed-value>
                 <stored-value>en_US</stored-value>
             </pair>-->
             <pair>
                 <displayed-value>English</displayed-value>
-                <stored-value>en</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Spanish</displayed-value>
-                <stored-value>es</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>German</displayed-value>
-                <stored-value>de</stored-value>
+                <stored-value>eng</stored-value>
             </pair>
             <pair>
                 <displayed-value>French</displayed-value>
-                <stored-value>fr</stored-value>
+                <stored-value>fra</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Gaelic</displayed-value>
+                <stored-value>gd</stored-value>
+            </pair>
+            <pair>
+                <displayed-value>Mi'kmaq</displayed-value>
+                <stored-value>mic</stored-value>
+            </pair>            
+            <pair>
+                <displayed-value>Chinese</displayed-value>
+                <stored-value>zho</stored-value>
+            </pair>            
+ 
+            <pair>
+                <displayed-value>German</displayed-value>
+                <stored-value>deu</stored-value>
             </pair>
             <pair>
                 <displayed-value>Italian</displayed-value>
-                <stored-value>it</stored-value>
+                <stored-value>ita</stored-value>
             </pair>
             <pair>
                 <displayed-value>Japanese</displayed-value>
-                <stored-value>ja</stored-value>
-            </pair>
-            <pair>
-                <displayed-value>Chinese</displayed-value>
-                <stored-value>zh</stored-value>
-            </pair>
+                <stored-value>jpn</stored-value>
+            </pair>        
             <pair>
                 <displayed-value>Portuguese</displayed-value>
-                <stored-value>pt</stored-value>
+                <stored-value>por</stored-value>
             </pair>
+           <pair>
+                <displayed-value>Spanish</displayed-value>
+                <stored-value>spa</stored-value>
+            </pair>                
             <pair>
                 <displayed-value>Turkish</displayed-value>
-                <stored-value>tr</stored-value>
+                <stored-value>tur</stored-value>
             </pair>
             <pair>
                 <displayed-value>(Other)</displayed-value>
