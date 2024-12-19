@@ -372,7 +372,7 @@
                     <label>Publisher</label>
                     <style>col-sm-8</style>
                     <input-type>onebox</input-type>
-                    <hint>Enter the name of the publisher of the previously issued instance of this item.</hint>
+                    <hint>Enter St. Francis Xavier University</hint>
                     <required></required>
                 </field>
             </row>
@@ -1747,10 +1747,6 @@
             <pair>
                 <displayed-value>N/A</displayed-value>
                 <stored-value></stored-value>
-            </pair>
-            <pair>
-                <displayed-value>English (United States)</displayed-value>
-                <stored-value>en_US</stored-value>
             </pair>
             <pair>
                 <displayed-value>English</displayed-value>
