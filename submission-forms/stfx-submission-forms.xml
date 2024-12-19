@@ -1747,7 +1747,11 @@
             <pair>
                 <displayed-value>N/A</displayed-value>
                 <stored-value></stored-value>
-            </pair>
+            </pair><!--
+            <pair>
+                <displayed-value>English (United States)</displayed-value>
+                <stored-value>en_US</stored-value>
+            </pair>-->
             <pair>
                 <displayed-value>English</displayed-value>
                 <stored-value>en</stored-value>
